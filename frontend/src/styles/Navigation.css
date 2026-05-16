@@ -1,0 +1,283 @@
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar.light {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar.dark {
+  background-color: rgba(15, 23, 42, 0.7);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation Container */
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+/* Logo */
+.nav-logo {
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, Monaco, monospace;
+  letter-spacing: 1px;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, #22d3ee, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.4));
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Desktop Menu */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+  letter-spacing: 0.3px;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: #3b82f6;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3b82f6;
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Dark Mode Toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.theme-toggle:hover {
+  opacity: 1;
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* Hamburger Menu Toggle (Mobile) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.menu-toggle:hover {
+  opacity: 1;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .mobile-menu {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.dark .mobile-menu {
+  background-color: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.mobile-nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 20px;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .nav-logo {
+    font-size: 18px;
+  }
+
+  .theme-toggle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 15px;
+  }
+
+  .nav-logo {
+    font-size: 16px;
+  }
+
+  .theme-toggle {
+    font-size: 18px;
+  }
+
+  .menu-toggle {
+    font-size: 20px;
+  }
+}
+.navbar.dark .nav-logo {
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+/* Fix nav link text color in dark mode */
+.navbar.dark .nav-link {
+  color: #f1f5f9;
+}
+
+/* Fix theme toggle button icon in dark mode */
+.navbar.dark .theme-toggle {
+  color: #f1f5f9;
+}
+
+/* Fix hamburger menu icon in dark mode */
+.navbar.dark .menu-toggle {
+  color: #f1f5f9;
+}
+/* Fix mobile nav link text color in dark mode */
+.navbar.dark .mobile-nav-link {
+  color: #f1f5f9;
+}
+.nav-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    justify-content: space-between;
+  }
+  .nav-right {
+    gap: 0.8rem;
+  }
+}
+/* --- DARK MODE LOGO BRACKETS & BLINK ENGINE --- */
+.nav-logo::before {
+  content: "</";
+  font-weight: 400;
+  color: #06b6d4;
+}
+
+.nav-logo::after {
+  content: ">";
+  font-weight: 400;
+  color: #38bdf8;
+  margin-left: 2px;
+  padding-right: 10px;
+  background: linear-gradient(#38bdf8, #38bdf8) no-repeat bottom right;
+  background-size: 8px 2px;
+  animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  50% { background: none; }
+}
+
+/* --- LIGHT MODE SWITCH OVERRIDES --- */
+.navbar.light .nav-logo {
+  background: linear-gradient(135deg, #059669, #047857); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: none;
+}
+
+.navbar.light .nav-logo::before {
+  color: #059669;
+}
+
+.navbar.light .nav-logo::after {
+  color: #059669;
+  background: linear-gradient(#059669, #059669) no-repeat bottom 1px right;
+  background-size: 8px 2px;
+}

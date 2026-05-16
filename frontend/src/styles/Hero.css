@@ -1,0 +1,228 @@
+/* Hero Section - Premium Layout */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero.light {
+ /* background: radial-gradient(circle at 0% 20%, #fff9f0, #fdf8f5);*/
+ box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+  color: #111827;
+}
+
+.hero.dark {
+  /*background: linear-gradient(135deg, #0f172a 0%, #1a2f4a 100%);*/
+ box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  color: #f9fafb;
+}
+
+.hero-container {
+  max-width: 1400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.4fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.hero-title {
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.hero-title .highlight {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 28px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.hero-tagline {
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.75;
+  max-width: 550px;
+  letter-spacing: 0.3px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  color: inherit;
+  padding: 14px 32px;
+  border-radius: 40px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+  border: 2px solid currentColor;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+.btn-secondary {
+  color: #1f2937;
+}
+.hero.dark .btn-secondary {
+  color: white;
+  border-color: white;
+}
+
+/* Hero Image Section */
+.hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 400px;
+}
+
+.profile-circle {
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  border: 4px solid #3b82f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.profile-circle.light {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+ box-shadow: 0 25px 40px -12px rgba(59,130,246,0.2), 0 0 0 24px rgba(59,130,246,0.06);
+}
+
+.profile-circle.dark {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-image-wrapper {
+    height: 300px;
+  }
+
+  .profile-circle {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px 50px;
+    min-height: auto;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-tagline {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+
+  .profile-circle {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #3b82f6;
+  }
+
+  .hero-image-wrapper {
+    height: 220px;
+  }
+}
+@keyframes float {
+  0% { transform: translateX(-50%) translateY(0px); }
+  50% { transform: translateX(-50%) translateY(8px); }
+  100% { transform: translateX(-50%) translateY(0px); }
+}
+.scroll-indicator { animation: float 2s infinite ease; }

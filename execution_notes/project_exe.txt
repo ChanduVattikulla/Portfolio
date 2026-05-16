@@ -1,0 +1,105 @@
+ Install required tools (if not already installed)
+bash# Node.js (for React)
+node --version    # Should show v16+ or higher
+
+# Python (for Flask)
+python --version  # Should show 3.8+
+
+# Git (for version control)
+git --version     # Should show 2.x+
+-------------------------
+📝 STEP 1: Initialize React Project
+Open terminal in portfolio-website/frontend folder and run:
+npx create-react-app .
+npm install framer-motion axios react-router-dom
+    This installs:
+
+    [framer-motion - Animations
+    axios - API calls to backend
+    react-router-dom - Page routing (for future multi-page sections)]
+
+------
+for backend (contact form msg submittion to my 71gmail )
+cd C:\Users\vatti\Desktop\Chandu_Portfolio
+mkdir backend
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install Flask flask-cors python-dotenv Flask-Mail
+pip freeze > requirements.txt
+# (created app.py and .env manually)
+python app.py
+-----
+run frontend in seperate terminal 
+cd frontend
+npm start
+---------Summary of your backend setup steps (from zero to working contact form)
+Here are all the commands and actions you performed in the terminal to build and run the Flask backend that now successfully sends emails from your portfolio contact form.
+
+1. Navigate to your project root and create backend folder
+bash
+cd C:\Users\vatti\Desktop\Chandu_Portfolio
+mkdir backend
+cd backend
+2. Create and activate a virtual environment
+bash
+python -m venv venv
+venv\Scripts\activate
+After activation, you saw (venv) in your terminal prompt.
+
+3. Install required Python packages
+bash
+pip install Flask flask-cors python-dotenv Flask-Mail
+4. Generate requirements.txt (for later deployment)
+bash
+pip freeze > requirements.txt
+5. Create app.py (the Flask application)
+You created a new file app.py inside the backend folder and pasted the complete Flask code that:
+
+Sets up CORS
+
+Configures Flask‑Mail with Gmail SMTP
+
+Defines the /api/contact endpoint
+
+6. Generate a Gmail App Password
+You went to myaccount.google.com/apppasswords
+
+Entered "Flask Portfolio" as the app name
+
+Clicked Generate
+
+Copied the 16‑character app password (e.g., abcd efgh ijkl mnop)
+
+7. Create .env file to store credentials
+Inside the backend folder, you created a file named .env (no extension) with:
+
+text
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASSWORD=your_16_character_app_password_without_spaces
+8. Run the backend server
+bash
+python app.py
+The terminal showed:
+
+text
+ * Serving Flask app 'app'
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000
+9. Update the React frontend (Contact.js)
+You replaced the handleSubmit function in frontend/src/pages/Contact.js with a version that sends a POST request to http://localhost:5000/api/contact.
+
+10. Test the full flow
+Backend running (terminal 1)
+
+Frontend running (npm start in another terminal)
+
+Submitted a test message via the contact form
+
+Received the success alert: "Message sent successfully! I will get back to you soon."
+
+The email arrived in your Gmail inbox
+
+11. Optional (you didn't need to use this, but it's part of the debugging)
+You never had to manually set environment variables in the terminal because the .env file worked correctly after you generated a valid App Password.
+
