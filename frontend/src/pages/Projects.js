@@ -91,7 +91,6 @@ const Projects = ({ darkMode }) => {
   ];
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [scrollPos, setScrollPos] = useState(0);
   const carouselRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
 // Show only first 3 featured projects in top section
