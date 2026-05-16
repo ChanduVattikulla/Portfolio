@@ -1,0 +1,15 @@
+# Backend secrets & environment
+backend/.env
+
+# Python virtual environment & cache
+venv/
+__pycache__/
+*.pyc
+
+# IDE folders (optional)
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
