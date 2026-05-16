@@ -358,3 +358,23 @@
     font-size: 22px;
   }
 }
+/* Responsive – dynamic units */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .carousel .project-card {
+    flex: 0 0 80vw;
+    max-width: 280px;
+  }
+  .carousel-btn {
+    width: clamp(2rem, 10vw, 3rem);
+    height: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+  .view-more-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}

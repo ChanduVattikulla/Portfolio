@@ -372,3 +372,27 @@
   transition: opacity 0.2s ease-in-out;
   opacity: 1;
 }
+/* Responsive – dynamic units */
+@media (max-width: 768px) {
+  .gallery {
+    gap: 4vw;
+    padding: 1rem;
+  }
+  .center-badge {
+    width: 40vw;
+    height: 40vw;
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .left-badge, .right-badge {
+    width: 25vw;
+    height: 25vw;
+    max-width: 90px;
+    max-height: 90px;
+  }
+  .gallery-arrow {
+    width: clamp(2rem, 8vw, 2.5rem);
+    height: clamp(2rem, 8vw, 2.5rem);
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  }
+}

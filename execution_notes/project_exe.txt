@@ -103,3 +103,7 @@ The email arrived in your Gmail inbox
 11. Optional (you didn't need to use this, but it's part of the debugging)
 You never had to manually set environment variables in the terminal because the .env file worked correctly after you generated a valid App Password.
 
+---------------------------------
+git add .
+git commit -m "Add new project"
+git push

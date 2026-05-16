@@ -100,3 +100,15 @@ border: 1px solid #e2e8f0;
   color: #e2e8f0;
   opacity: 0.95;
 }
+/* Responsive – dynamic units */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1rem;
+  }
+  .about-content {
+    font-size: 0.9rem;
+  }
+  .read-more-btn {
+    padding: 0.5rem 1rem;
+  }
+}

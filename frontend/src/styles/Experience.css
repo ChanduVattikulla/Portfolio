@@ -259,4 +259,29 @@
     flex-direction: column;
     gap: 0.2rem;
   }
+}/* Responsive – dynamic units */
+@media (max-width: 768px) {
+  .exp-two-columns {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .exp-two-columns::before {
+    display: none;
+  }
+  .exp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .exp-card {
+    padding: 1rem;
+  }
+  .exp-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .exp-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+  }
 }
