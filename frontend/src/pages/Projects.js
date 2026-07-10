@@ -20,12 +20,12 @@ const Projects = ({ darkMode }) => {
     },
     {
       id: 2,
-      title: 'AI Chat Assistant',
-      description: 'Real-time chat application powered by AI with WebSocket integration',
-      tech: ['React', 'Flask', 'WebSocket', 'Python'],
-      image: 'https://imgs.search.brave.com/cTEtpfc4GhCBOfoLCRVXM_8Tz1RMn2j6EEETI8JFcAk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMjE3/OTk0MTA5Ni92ZWN0/b3IvY2hhdGJvdC1h/c3Npc3RhbnQtYXJ0/aWZpY2lhbC1pbnRl/bGxpZ2VuY2UtaGVs/cC1zZXJ2aWNlLWZv/ci1idXNpbmVzcy1k/YXRhLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1UNG84UVpD/MXdGZ1dvc1ZaU0xr/TC03QzYwV3NZZUI3/clliZmg5UkNYdmxj/PQ',
-      github: 'https://github.com/yourprofile/ai-chat',
-      demo: 'https://ai-chat-demo.com',
+      title: 'NRCM AttendEase',
+      description: 'Full-stack attendance tracker for NRCM students — live portal scraping, skip calculator, day-by-day & period-wise attendance planner with real-time planned percentage updates',
+      tech: ['FastAPI', 'PostgreSQL', 'Vanilla JS', 'Python', 'Vercel', 'Render'],
+      image: '/images/nrcmattendlogin.png',
+      github: 'https://github.com/ChanduVattikulla/nrcm-attendease',
+      demo: 'https://nrcmattend.vercel.app',
       featured: true
     },
     {

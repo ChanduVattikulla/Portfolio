@@ -1,42 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import '../styles/Stats.css';
+
 const Stats = ({ darkMode }) => {
-  // Statistics section showing real achievements
-  // TO MODIFY: Update the target values below with your actual numbers
-  // These will automatically animate when scrolled into view
-  
   const [stats, setStats] = useState([
     { 
       label: 'LeetCode Problems',
-      target: 450,  // Change this to your actual LeetCode solved problems
+      target: 50,
       current: 0,
-      link: 'https://leetcode.com/yourprofile'  // Update with your profile
+      link: 'https://leetcode.com/u/ChanduVattikulla/'
     },
     { 
       label: 'GitHub Repositories',
-      target: 8,    // Change to your actual repo count
+      target: 8,
       current: 0,
-      link: 'https://github.com/yourprofile'  // Update with your profile
+      link: 'https://github.com/ChanduVattikulla'
     },
     { 
       label: 'Certifications',
-      target: 12,   // Change to your actual cert count
+      target: 12,
       current: 0,
-      link: '#certifications'  // Links to certifications section
+      link: '#certifications'
     },
     { 
       label: 'Internships',
-      target: 2,    // Change to your actual internship count
+      target: 3,
       current: 0,
-      link: '#experience'  // Links to experience section
+      link: '#experience'
     },
   ]);
 
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+  // 👇 attach a ref to the section
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    if (!shouldAnimate) return;
+    if (!isInView) return;
 
     const interval = setInterval(() => {
       setStats(prevStats => 
@@ -45,20 +44,24 @@ const Stats = ({ darkMode }) => {
           current: Math.min(stat.current + Math.ceil(stat.target / 25), stat.target)
         }))
       );
-    }, 40);
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [shouldAnimate]);
+  }, [isInView]);
 
   return (
-    <section id="stats" className={`stats ${darkMode ? 'dark' : 'light'}`}>
+    <section 
+      ref={sectionRef}
+      id="stats" 
+      className={`stats ${darkMode ? 'dark' : 'light'}`}
+    >
       <div className="section-container">
         <motion.h2 
           className="section-title"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, onViewEnter: () => setShouldAnimate(true) }}
+          viewport={{ once: true }}
         >
           By The Numbers
         </motion.h2>
@@ -76,19 +79,30 @@ const Stats = ({ darkMode }) => {
         <div className="stats-grid">
           {stats.map((stat, index) => (
             <motion.a
-              key={index}
-              href={stat.link}
-              className="stat-card-link"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
+  key={index}
+  href={stat.link}
+  className="stat-card-link"
+  {...(stat.link.startsWith('#') 
+      ? {} 
+      : { target: "_blank", rel: "noopener noreferrer" })}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1.2, delay: index * 0.2 }}
+  viewport={{ once: true }}
+>
+
               <motion.div 
                 className="stat-card"
                 whileHover={{ scale: 1.08, y: -5 }}
               >
-                <div className="stat-value">{stat.current}+</div>
+                <motion.div 
+  className="stat-value"
+  animate={stat.current === stat.target ? { scale: [1, 1.2, 1] } : {}}
+  transition={{ duration: 0.8 }}
+>
+  {new Intl.NumberFormat('en-US', { minimumIntegerDigits: 2 }).format(stat.current)}+
+</motion.div>
+
                 <div className="stat-label">{stat.label}</div>
               </motion.div>
             </motion.a>
