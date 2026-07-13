@@ -104,9 +104,14 @@
   transform: scale(0.8);
 }
 
-/* Navigation Arrows - Overlaid */
+/* ============================================================
+   NAVIGATION ARROWS – COMMENTED OUT (enable later if needed)
+   ============================================================ */
+/*
 .gallery-arrow {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -121,8 +126,6 @@
   justify-content: center;
   font-weight: 600;
   z-index: 5;
-  top: 50%;
-  transform: translateY(-50%);
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
@@ -139,6 +142,7 @@
 .gallery-arrow.right {
   right: 20px;
 }
+*/
 
 /* Certificate Info */
 .cert-info {
@@ -159,7 +163,9 @@
   margin-bottom: 1.5rem;
 }
 
-/* Certificate Actions */
+/* ============================================================
+   ENHANCED BUTTONS – Primary & Secondary
+   ============================================================ */
 .cert-actions {
   display: flex;
   gap: 1rem;
@@ -168,8 +174,9 @@
   margin-bottom: 1.5rem;
 }
 
+/* Primary Button – "View Certificate" */
 .verify-btn {
-  padding: 12px 24px;
+  padding: 12px 28px;
   background-color: #3b82f6;
   color: white;
   border: none;
@@ -177,24 +184,66 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .verify-btn:hover {
   background-color: #2563eb;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+  transform: translateY(-2px);
 }
 
+.verify-btn:active {
+  transform: translateY(0px);
+}
+
+/* Secondary Button – "Verify →" */
 .verify-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 12px 28px;
+  background-color: transparent;
   color: #3b82f6;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
-  transition: all 0.2s ease;
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .verify-link:hover {
-  opacity: 0.75;
+  background-color: #3b82f6;
+  color: white;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.verify-link:active {
+  transform: translateY(0px);
+}
+
+/* Dark mode buttons */
+.dark .verify-btn {
+  background-color: #2563eb;
+}
+
+.dark .verify-btn:hover {
+  background-color: #3b82f6;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.dark .verify-link {
+  color: #60a5fa;
+  border-color: #60a5fa;
+}
+
+.dark .verify-link:hover {
+  background-color: #60a5fa;
+  color: #0f172a;
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.3);
 }
 
 /* Certificate Counter */
@@ -274,8 +323,9 @@
   border-radius: 12px;
   margin-bottom: 2rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: none;  /* Add this line */
+  box-shadow: none;
 }
+
 /* Modal Info */
 .modal-info {
   text-align: center;
@@ -294,65 +344,37 @@
   margin-bottom: 1.5rem;
 }
 
+/* Modal Verify Button – consistent with primary */
 .verify-link-modal {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 12px 28px;
   background-color: #3b82f6;
   color: white;
   text-decoration: none;
   border-radius: 10px;
   font-weight: 600;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  border: none;
 }
 
 .verify-link-modal:hover {
   background-color: #2563eb;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-  .certifications {
-    padding: 80px 20px;
-  }
-
-  .gallery {
-    padding: 2rem 1rem;
-    gap: 1rem;
-  }
-
-  .center-badge {
-    width: 150px;
-    height: 150px;
-  }
-
-  .gallery-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-
-  .gallery-arrow.left {
-    left: 10px;
-  }
-
-  .gallery-arrow.right {
-    right: 10px;
-  }
-
-  .cert-info h3 {
-    font-size: 18px;
-  }
-
-  .cert-modal {
-    padding: 1.5rem;
-  }
-
-  .modal-info h3 {
-    font-size: 18px;
-  }
+/* Dark mode modal verify */
+.dark .verify-link-modal {
+  background-color: #2563eb;
 }
-/* Dark mode text colors for certifications */
+
+.dark .verify-link-modal:hover {
+  background-color: #3b82f6;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+/* Dark mode text colors */
 .dark .cert-info h3,
 .dark .modal-info h3 {
   color: #f1f5f9;
@@ -366,33 +388,206 @@
 .dark .cert-counter {
   color: #94a3b8;
 }
+
 /* Lazy loading fade-in */
 .gallery-badge img,
 .cert-image {
   transition: opacity 0.2s ease-in-out;
   opacity: 1;
 }
-/* Responsive – dynamic units */
+
+/* ============================================================
+   RESPONSIVE – LARGER BADGES, TIGHTER PADDING
+   ============================================================ */
+
+/* Tablets (max-width: 768px) */
 @media (max-width: 768px) {
+  .certifications {
+    padding: 80px 16px;
+  }
+
   .gallery {
-    gap: 4vw;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 2rem 1.2rem;
+    min-height: 320px;
   }
+
   .center-badge {
-    width: 40vw;
-    height: 40vw;
-    max-width: 150px;
-    max-height: 150px;
+    width: 170px;
+    height: 170px;
   }
-  .left-badge, .right-badge {
-    width: 25vw;
-    height: 25vw;
-    max-width: 90px;
-    max-height: 90px;
+
+  .left-badge,
+  .right-badge {
+    width: 85px;
+    height: 85px;
   }
+
+  /* Arrow buttons – commented out
   .gallery-arrow {
-    width: clamp(2rem, 8vw, 2.5rem);
-    height: clamp(2rem, 8vw, 2.5rem);
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+  .gallery-arrow.left {
+    left: 12px;
+  }
+  .gallery-arrow.right {
+    right: 12px;
+  }
+  */
+
+  .cert-info h3 {
+    font-size: 20px;
+  }
+
+  .cert-info p {
+    font-size: 13px;
+  }
+
+  .cert-modal {
+    padding: 1.5rem;
+  }
+
+  .modal-info h3 {
+    font-size: 20px;
+  }
+
+  .verify-btn,
+  .verify-link {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+/* Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .certifications {
+    padding: 60px 10px;
+  }
+
+  .gallery {
+    gap: 1rem;
+    padding: 1.5rem 0.6rem;
+    min-height: 280px;
+    border-radius: 12px;
+  }
+
+  .center-badge {
+    width: 150px;
+    height: 150px;
+    border-width: 2.5px;
+  }
+
+  .left-badge,
+  .right-badge {
+    width: 75px;
+    height: 75px;
+  }
+
+  /* Arrow buttons – commented out
+  .gallery-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .gallery-arrow.left {
+    left: 6px;
+  }
+  .gallery-arrow.right {
+    right: 6px;
+  }
+  */
+
+  .cert-info {
+    margin-top: 1.5rem;
+  }
+
+  .cert-info h3 {
+    font-size: 18px;
+  }
+
+  .cert-info p {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .cert-actions {
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .verify-btn {
+    padding: 10px 18px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .verify-link {
+    padding: 10px 18px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .cert-counter {
+    font-size: 11px;
+  }
+
+  .cert-modal {
+    padding: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .modal-close {
+    top: 1rem;
+    right: 1rem;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .modal-info h3 {
+    font-size: 18px;
+  }
+
+  .modal-info p {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .verify-link-modal {
+    padding: 10px 18px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
+/* Extra small phones (max-width: 360px) */
+@media (max-width: 360px) {
+  .gallery {
+    gap: 0.8rem;
+    padding: 1.2rem 0.4rem;
+    min-height: 240px;
+  }
+
+  .center-badge {
+    width: 130px;
+    height: 130px;
+  }
+
+  .left-badge,
+  .right-badge {
+    width: 65px;
+    height: 65px;
+  }
+
+  .cert-info h3 {
+    font-size: 16px;
+  }
+
+  .verify-btn,
+  .verify-link {
+    padding: 8px 14px;
+    font-size: 11px;
   }
 }

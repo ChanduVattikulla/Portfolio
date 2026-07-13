@@ -1,39 +1,60 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Experience.css';
+import 'devicon/devicon.min.css';
 
 const Experience = ({ darkMode }) => {
   const experiences = [
     {
-      id: 1,
-      role: 'Python Fullstack Developer Internship',
-      company: 'EduSkills',
-      duration: 'March 2026 (1 month)',
+    id: 3,  // ← new unique ID
+    role: 'Full Stack Development Intern',
+    company: 'Thiranex',
+    duration: 'May – June 2026 (2 months)',
+    mode: 'Remote',
+    type: 'Internship',
+    issueDate: "June 4, 2026",        // no certificate verification yet
+    verifyLink: 'https://www.thiranex.in/?verifyId=THX-MAY226-3796',       // no verification link yet
+    description: 'Built full‑stack web applications using Python, Django, HTML, CSS, JavaScript, and MySQL. Developed responsive user interfaces and integrated backend functionality while working on real‑world projects. Strengthened practical skills in backend development, database management, debugging, testing, and deployment.',
+    techStack: ['Python', 'Django', 'HTML5', 'CSS3', 'JavaScript', 'MySQL'],
+    achievements: [
+      'Built full‑stack web applications using Django and MySQL',
+      'Developed responsive user interfaces and integrated backend functionality',
+      'Strengthened skills in backend development, database management, debugging, and testing'
+    ],
+    outcome: 'Completed real‑world full‑stack projects with a production‑ready codebase',
+    icon: 'devicon-python-plain colored',  // or use 'devicon-django-plain colored' if you prefer
+    color: 'transparent'  // transparent background (keeps icons clean)
+  },
+    {
+      id: 2,
+      role: 'AI-Powered Cloud Engineer Virtual Internship',
+      company: 'EduSkills Foundation®',
+      duration: 'April – June 2026 (3 months)',
       mode: 'Remote',
       type: 'Internship',
-      issueDate: 'March 18, 2026',
-      verifyLink: 'https://verify.eduskills.com/cert/xyz',
-      description: 'Built full‑stack web applications using Django and React, focusing on database integration and REST APIs.Built full‑stack web applications using Django and React, focusing on database integration and REST APIs',
-      techStack: ['Python', 'Django', 'SQL', 'React', 'JWT'],
+      issueDate: 'July 10, 2026',
+      verifyLink: 'https://certificate.eduskillsfoundation.org/verify/4662941f3c46960112cc/4662941f3c46960112cc',
+      description: 'Gained hands-on experience through AWS labs covering cloud computing, networking, compute, storage, security, serverless, and Generative AI. Earned multiple AWS Educate skill badges by completing practical learning modules and assessments.',
+      techStack: ['AWS EC2', 'S3', 'Lambda', 'API Gateway', 'IAM', 'Generative AI', 'CloudFormation'],
       achievements: [
-        'Designed database schemas for 3+ modules',
-        'Implemented JWT authentication',
-        'Deployed applications on Render'
-      ],
-      outcome: 'Delivered 2 production‑ready features used by 50+ internal users',
-      icon: '🐍',
-      color: '#3b82f6'
+      'Provisioned and managed EC2 instances with auto‑scaling',
+      'Deployed serverless functions using AWS Lambda and API Gateway',
+      'Designed S3 bucket policies and IAM roles for secure access',
+      'Completed AWS Educate labs on AI/ML and serverless computing'
+        ],
+        outcome: 'Earned 10 AWS Educate skill badges; built a serverless application prototype',
+      icon: 'devicon-amazonwebservices-plain-wordmark colored',
+      color: 'transparent'  
     },
-    // add more experiences following the same structure
     {
       id: 1,
       role: 'Python Fullstack Developer Internship',
       company: 'EduSkills',
-      duration: 'March 2026 (1 month)',
+      duration: 'Jan – March 2026 (10 weeks)',
       mode: 'Remote',
       type: 'Internship',
       issueDate: 'March 18, 2026',
-      verifyLink: 'https://verify.eduskills.com/cert/xyz',
+      verifyLink: 'https://certificate.eduskillsfoundation.org/verify/462bb21459ddeb5f008d/462bb21459ddeb5f008d',
       description: 'Built full‑stack web applications using Django and React, focusing on database integration and REST APIs.',
       techStack: ['Python', 'Django', 'SQL', 'React', 'JWT'],
       achievements: [
@@ -42,9 +63,11 @@ const Experience = ({ darkMode }) => {
         'Deployed applications on Render'
       ],
       outcome: 'Delivered 2 production‑ready features used by 50+ internal users',
-      icon: '🐍',
-      color: '#3b82f6'
-    }
+      icon: 'devicon-python-plain colored',
+      color: 'transparent'
+    },
+    // add more experiences following the same structure
+    
   ];
 
   return (
@@ -66,8 +89,8 @@ const Experience = ({ darkMode }) => {
               <div className="card-top">
                 <div className="role-group">
                   <div className="exp-icon" style={{ backgroundColor: exp.color }}>
-                    {exp.icon}
-                  </div>
+                    {typeof exp.icon === 'string' ? <i className={exp.icon}></i> : exp.icon}
+                    </div>
                   <h3 className="exp-role">{exp.role}</h3>
                 </div>
                 <div className="action-group">

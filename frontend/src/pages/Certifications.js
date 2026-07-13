@@ -229,23 +229,24 @@ const handleWheel = (e) => {
               <img src={next.image} alt={next.title} loading="lazy" />
             </motion.div>
 
-            {/* Overlaid Navigation Arrows */}
-            <motion.button 
-              className="gallery-arrow left"
-              onClick={handlePrev}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              ‹
-            </motion.button>
-            <motion.button 
-              className="gallery-arrow right"
-              onClick={handleNext}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              ›
-            </motion.button>
+            {/* Overlaid Navigation Arrows – COMMENTED OUT 
+<motion.button 
+  className="gallery-arrow left"
+  onClick={handlePrev}
+  whileHover={{ scale: 1.15 }}
+  whileTap={{ scale: 0.9 }}
+>
+  ‹
+</motion.button>
+<motion.button 
+  className="gallery-arrow right"
+  onClick={handleNext}
+  whileHover={{ scale: 1.15 }}
+  whileTap={{ scale: 0.9 }}
+>
+  ›
+</motion.button>
+*/}
           </div>
 
           {/* Certificate Info */}
