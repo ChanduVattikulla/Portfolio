@@ -9,16 +9,6 @@ const Projects = ({ darkMode }) => {
 
   const allProjects = [
     {
-      id: 3,
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce app with payment integration and admin dashboard',
-      tech: ['React', 'Flask', 'PostgreSQL', 'Stripe'],
-      image: 'https://market-resized.envatousercontent.com/previews/files/804979924/02.jpg?w=590&h=300&cf_fit=crop&crop=top&format=auto&q=85&s=bdf540bf3fc52cda632d386afbfe538f3ae9ae2b7a04be2d7b2d824c559da55c',
-      github: 'https://github.com/yourprofile/ecommerce',
-      demo: 'https://project-demo.com',
-      featured: true
-    },
-    {
       id: 1,
       title: 'NRCM AttendEase',
       description: 'Full-stack attendance tracker for NRCM students — live portal scraping, skip calculator, day-by-day & period-wise attendance planner with real-time planned percentage updates',
@@ -28,6 +18,27 @@ const Projects = ({ darkMode }) => {
       demo: 'https://nrcmattend.vercel.app',
       featured: true
     },
+    {
+      id: 2,
+      title: 'Portfolio Platform',
+      description: 'Personal portfolio platform with modern design and smooth animations',
+      tech: ['React', 'Framer Motion', 'CSS3'],
+      image: '/images/personalportfolio.png',
+      github: 'https://github.com/ChanduVattikulla/Portfolio',
+      demo: 'https://chanduvattikulla.netlify.app/',
+      featured: true
+    },
+    {
+      id: 3,
+      title: 'E-Commerce Platform',
+      description: 'Full-stack e-commerce app with payment integration and admin dashboard',
+      tech: ['React', 'Flask', 'PostgreSQL', 'Stripe'],
+      image: 'https://market-resized.envatousercontent.com/previews/files/804979924/02.jpg?w=590&h=300&cf_fit=crop&crop=top&format=auto&q=85&s=bdf540bf3fc52cda632d386afbfe538f3ae9ae2b7a04be2d7b2d824c559da55c',
+      github: 'https://github.com/yourprofile/ecommerce',
+      demo: 'https://project-demo.com',
+      featured: true
+    },
+    
     {
       id: 6,
       title: 'Task Management App',
@@ -67,16 +78,6 @@ const Projects = ({ darkMode }) => {
       github: 'https://github.com/yourprofile/blog',
       demo: 'https://blog-demo.com',
       featured: false
-    },
-    {
-      id: 2,
-      title: 'Portfolio Platform',
-      description: 'Personal portfolio platform with modern design and smooth animations',
-      tech: ['React', 'Framer Motion', 'CSS3'],
-      image: '/images/personalportfolio.png',
-      github: 'https://github.com/ChanduVattikulla/Portfolio',
-      demo: 'https://chanduvattikulla.netlify.app/',
-      featured: true
     },
     {
       id: 7,
