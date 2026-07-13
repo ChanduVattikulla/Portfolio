@@ -9,7 +9,7 @@ const Projects = ({ darkMode }) => {
 
   const allProjects = [
     {
-      id: 1,
+      id: 3,
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce app with payment integration and admin dashboard',
       tech: ['React', 'Flask', 'PostgreSQL', 'Stripe'],
@@ -19,7 +19,7 @@ const Projects = ({ darkMode }) => {
       featured: true
     },
     {
-      id: 2,
+      id: 1,
       title: 'NRCM AttendEase',
       description: 'Full-stack attendance tracker for NRCM students — live portal scraping, skip calculator, day-by-day & period-wise attendance planner with real-time planned percentage updates',
       tech: ['FastAPI', 'PostgreSQL', 'Vanilla JS', 'Python', 'Vercel', 'Render'],
@@ -29,14 +29,14 @@ const Projects = ({ darkMode }) => {
       featured: true
     },
     {
-      id: 3,
+      id: 6,
       title: 'Task Management App',
       description: 'Collaborative task management with real-time updates and notifications',
       tech: ['React', 'Firebase', 'Tailwind CSS'],
       image: 'https://imgs.search.brave.com/VxXFVNjxIL5TsAE-YmiAgp5_fnsZTIMd6ZRvQWdV-EM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taXIt/czMtY2RuLWNmLmJl/aGFuY2UubmV0L3By/b2plY3RzLzQwNC8y/MDM1YmYxNzUwMjU1/MDUuWTNKdmNDd3lN/ekF4TERFNE1EQXNO/VEVzTUEuanBn',
       github: 'https://github.com/yourprofile/task-manager',
       demo: 'https://task-manager-demo.com',
-      featured: true
+      featured: false
     },
      {
       id: 8,
@@ -69,14 +69,14 @@ const Projects = ({ darkMode }) => {
       featured: false
     },
     {
-      id: 6,
+      id: 2,
       title: 'Portfolio Platform',
       description: 'Personal portfolio platform with modern design and smooth animations',
       tech: ['React', 'Framer Motion', 'CSS3'],
       image: '/images/personalportfolio.png',
       github: 'https://github.com/ChanduVattikulla/Portfolio',
       demo: 'https://chanduvattikulla.netlify.app/',
-      featured: false
+      featured: true
     },
     {
       id: 7,
