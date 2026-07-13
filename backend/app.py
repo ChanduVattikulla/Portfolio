@@ -10,13 +10,14 @@ app = Flask(__name__)
 CORS(app)
 
 # Email configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', '465'))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'false').lower() == 'true'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'true').lower() == 'true'
 app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_USER')
+app.config['MAIL_TIMEOUT'] = 10
 
 mail = Mail(app)
 
@@ -43,9 +44,9 @@ def contact():
     except Exception as e:
         print("="*50)
         print("EMAIL SEND ERROR:")
-        print(str(e))
+        print(type(e).__name__, str(e))
         print("="*50)
-        return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
+        return jsonify({'error': f'Failed to send email: {type(e).__name__}: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

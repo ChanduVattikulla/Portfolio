@@ -71,9 +71,9 @@ const handleSubmit = async (e) => {
             <p>Location:📍 Hyderabad, India</p>
 
             <div className="social-links"> 
-              <a href="https://www.linkedin.com/in/chandu-vattikulla/" className="social-btn">LinkedIn</a>
-              <a href="https://github.com/ChanduVattikulla" className="social-btn">GitHub</a>
-              <a href="https://leetcode.com/u/ChanduVattikulla/" className="social-btn">LeetCode</a>
+              <a href="https://www.linkedin.com/in/chandu-vattikulla/" className="social-btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://github.com/ChanduVattikulla" className="social-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://leetcode.com/u/ChanduVattikulla/" className="social-btn" target="_blank" rel="noopener noreferrer">LeetCode</a>
             </div>
           </motion.div>
 
