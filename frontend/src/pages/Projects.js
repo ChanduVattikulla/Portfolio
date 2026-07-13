@@ -73,9 +73,9 @@ const Projects = ({ darkMode }) => {
       title: 'Portfolio Platform',
       description: 'Personal portfolio platform with modern design and smooth animations',
       tech: ['React', 'Framer Motion', 'CSS3'],
-      image: 'https://imgs.search.brave.com/K-G0lBHTV4768blHABKrwiSvJVh1MIIWhHNQNLTiEN4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly81My5m/czEuaHVic3BvdHVz/ZXJjb250ZW50LW5h/MS5uZXQvaHViLzUz/L2h1YmZzL2Jlc3Ql/MjBibG9nZ2luZyUy/MHBsYXRmb3Jtcywl/MjBqb29tbGEud2Vi/cD93aWR0aD02NTAm/aGVpZ2h0PTM1NSZu/YW1lPWJlc3QlMjBi/bG9nZ2luZyUyMHBs/YXRmb3JtcywlMjBq/b29tbGEud2VicA',
-      github: 'https://github.com/yourprofile/portfolio',
-      demo: 'https://portfolio-demo.com',
+      image: '/images/personalportfolio.png',
+      github: 'https://github.com/ChanduVattikulla/Portfolio',
+      demo: 'https://chanduvattikulla.netlify.app/',
       featured: false
     },
     {
