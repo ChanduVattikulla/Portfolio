@@ -1,19 +1,35 @@
+/* 
+   ===== GLOBAL FOUNDATION =====
+   This file loads BEFORE App.css.
+   Keep ONLY what App.css doesn't already handle.
+*/
+
+/* 1. CSS RESET - Removes default browser spacing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 2. HTML & BODY - Base settings */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
+  /* Font is now handled by App.css (Inter), so we keep this as fallback */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 3. CODE BLOCKS - Inline code styling (App.css doesn't cover this) */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-html {
-  scroll-behavior: smooth;
+  font-size: 0.9em;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--text-primary);
 }

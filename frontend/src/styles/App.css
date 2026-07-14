@@ -1,4 +1,45 @@
-/* Global Styles */
+/* 1. IMPORT INTER VARIABLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap');
+
+/* 2. CSS VARIABLES (THEME TOKENS) - The secret to premium theming */
+:root {
+  /* Light Mode Tokens (default) */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border-light: rgba(255, 255, 255, 0.4);
+  --border-dark: rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 30px 60px -15px rgba(99, 102, 241, 0.20);
+  --glow-color: rgba(99, 102, 241, 0.08);
+  --card-border-hover: rgba(99, 102, 241, 0.4);
+  --gradient-main: linear-gradient(135deg, #6366f1 0%, #8b5cf6 40%, #d946ef 100%);
+  --noise-opacity: 0.03;
+}
+
+/* Dark Mode Tokens */
+.app.dark-mode {
+  --bg-primary: #020617;
+  --bg-secondary: #0b1120;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-light: rgba(255, 255, 255, 0.06);
+  --border-dark: rgba(255, 255, 255, 0.03);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+  --glow-color: rgba(99, 102, 241, 0.15);
+  --card-border-hover: rgba(99, 102, 241, 0.6);
+  --noise-opacity: 0.05;
+}
+
+/* 3. GLOBAL RESET & BASE */
 * {
   margin: 0;
   padding: 0;
@@ -10,150 +51,350 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Poppins', sans-serif;
-  line-height: 1.6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7; /* Increased for better readability */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  transition: background-color 0.4s ease, color 0.3s ease;
 }
 
-/* Light Mode */
-.app.light-mode { background: linear-gradient(145deg, #ffffff 0%, #f5f7fc 100%); color: #1f2937; }
+/* 4. THE ATMOSPHERIC BACKGROUND (Double Glow + Noise Texture) */
+.app {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease;
+}
 
+/* Glow Orbs */
+.app::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  right: -15%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
+.app::after {
+  content: '';
+  position: fixed;
+  bottom: -30%;
+  left: -15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* Dark Mode */
-.app.dark-mode { background: linear-gradient(145deg, #0f172a 0%, #131e3a 100%); color: #f1f5f9; }
+/* The "Noise/Grain" Texture - This is the secret sauce for a premium feel */
+.app .grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
 
+/* Ensure all content sits above the background magic */
+.app > * {
+  position: relative;
+  z-index: 1;
+}
 
-
-
-/* Main Content */
+/* 5. MAIN CONTENT SPACING */
 main {
   min-height: 100vh;
+  padding: 0 0 4rem 0;
 }
 
-/* Section Container */
+/* 6. SECTION CONTAINER */
 .section-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
-/* Section Title */
+/* 7. STANDARD SECTION SPACING */
+.section {
+  padding: clamp(4rem, 10vh, 8rem) 0;
+}
+
+/* 8. TYPOGRAPHY SCALE (Vertical Rhythm) */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+/* SECTION SPACING (Reduced slightly for better flow) */
+.section {
+  padding: clamp(3rem, 6vh, 6rem) 0;
+}
+
+/* SECTION TITLES (Fixed - Perfectly sized now) */
 .section-title {
-  font-size: 42px;
+  font-size: clamp(2rem, 2.8vw, 3rem); /* Maxes out at 48px on big screens */
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   text-align: center;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.03em;
   line-height: 1.2;
+  
+  /* Gradient Text */
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
-/* Scrollbar Styling */
+/* Glowing underline for the title (Slightly smaller to match) */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  border-radius: 4px;
+  background: var(--gradient-main);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Subtitle for sections (Stays the same, but just in case) */
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 550px;
+  margin: 0.5rem auto 2.5rem auto;
+  transition: color 0.3s ease;
+}
+
+/* Glowing underline for the title */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--gradient-main);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); /* GLOW EFFECT */
+}
+
+/* Subtitle for sections */
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 1.5rem auto 3rem auto;
+  transition: color 0.3s ease;
+}
+
+/* 9. ULTIMATE GLASS CARD (With animated border on hover) */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-sm);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* The "Shimmer" hover effect */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover::before {
+  left: 100%;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  background: var(--bg-card-hover);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.dark-mode .glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.15);
+}
+
+/* 10. PREMIUM BUTTONS (Add these classes to your buttons) */
+.btn-primary {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--gradient-main);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 60px; /* Pill shape */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  text-align: center;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  border: 1.5px solid var(--border-dark);
+  border-radius: 60px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-secondary:hover {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.05);
+  transform: translateY(-3px);
+}
+
+/* 11. FLOATING ANIMATION (Add className="floating" to your hero image) */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.floating {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* 12. GENTLE PULSE GLOW (For badges or status dots) */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* 13. SCROLLBAR (Super thin + gradient) */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.light-mode ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.5);
-  border-radius: 5px;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366f1, #d946ef);
+  border-radius: 10px;
 }
 
-.light-mode ::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.7);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4f46e5, #c026d3);
 }
 
-.dark-mode ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.6);
-  border-radius: 5px;
-}
-
-.dark-mode ::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.8);
-}
-
-/* Selection Color */
-.light-mode ::selection {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: #1f2937;
+/* 14. SELECTION COLOR */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #0f172a;
 }
 
 .dark-mode ::selection {
-  background-color: rgba(59, 130, 246, 0.4);
+  background: rgba(99, 102, 241, 0.5);
   color: #f1f5f9;
 }
 
-/* Links */
+/* 15. LINKS (With gradient hover) */
 a {
-  color: #3b82f6;
+  color: #6366f1;
   text-decoration: none;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gradient-main);
+  transition: width 0.3s ease;
 }
 
 a:hover {
-  opacity: 0.8;
+  color: #4f46e5;
 }
 
-/* Button Base Styles */
-button {
-  font-family: inherit;
+a:hover::after {
+  width: 100%;
 }
 
-/* Responsive Typography */
-@media (max-width: 1024px) {
-  .section-title {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 28px;
-    margin-bottom: 2rem;
-  }
-
-  .section-container {
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .section-title {
-    font-size: 24px;
-  }
-
-  .section-container {
-    padding: 0 12px;
-  }
-}
-
-/* Focus Styles for Accessibility */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-/* Smooth Transitions */
-* {
-  transition-property: background-color, border-color, color, box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Image Optimization */
+/* 16. IMAGES */
 img {
   max-width: 100%;
   height: auto;
   display: block;
+  border-radius: 16px;
 }
 
-/* Utility Classes */
+/* 17. ACCESSIBILITY */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* 18. UTILITY CLASSES */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -164,4 +405,88 @@ img {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.text-gradient {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 19. RESPONSIVE REFINEMENTS */
+@media (max-width: 1024px) {
+  .section-container { padding: 0 24px; }
+  .app::before { width: 500px; height: 500px; top: -20%; right: -10%; }
+}
+
+@media (max-width: 768px) {
+  .section-container { padding: 0 18px; }
+  .section-title::after { width: 40px; height: 3px; }
+  .glass-card { padding: 1.5rem; border-radius: 20px; }
+  .glass-card:hover { transform: translateY(-4px) scale(1.01); }
+  .app::before { width: 300px; height: 300px; }
+  .app::after { width: 250px; height: 250px; bottom: -20%; }
+}
+
+@media (max-width: 480px) {
+  .section-container { padding: 0 14px; }
+  .btn-primary, .btn-secondary { padding: 12px 24px; width: 100%; justify-content: center; }
+}
+/* ============================================================
+   ABOUT – ENHANCED CONTENT STYLES
+   ============================================================ */
+
+/* Short intro – slightly emphasized */
+.about-intro {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Expanded content container */
+.expanded-content {
+  overflow: hidden;
+}
+
+/* Each expanded paragraph */
+.about-expanded-text {
+  margin-top: 1.2rem;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  padding-left: 1rem;
+  border-left: 3px solid #6366f1;
+  opacity: 0.85;
+}
+
+/* Slightly different style for the last paragraph */
+.about-expanded-text:last-child {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .about-intro {
+    font-size: 0.95rem;
+  }
+  
+  .about-expanded-text {
+    font-size: 0.9rem;
+    padding-left: 0.8rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-intro {
+    font-size: 0.9rem;
+  }
+  
+  .about-expanded-text {
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
+    border-left-width: 2px;
+  }
 }

@@ -1,14 +1,6 @@
-/* Certifications Section */
+/* Certifications Section - Premium Integration */
 .certifications {
-  padding: 100px 20px;
-}
-
-.certifications.light {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-}
-
-.certifications.dark {
-  background: linear-gradient(135deg, #0f172a 0%, #1a2f4a 100%);
+  padding: clamp(3rem, 6vh, 6rem) 0;
 }
 
 /* Gallery Container */
@@ -18,50 +10,43 @@
   position: relative;
 }
 
-/* Gallery Stage */
+/* Gallery Stage - Glassmorphism */
 .gallery {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
   padding: 3rem 2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
   min-height: 350px;
   touch-action: pan-y pinch-zoom;
   position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.light .gallery {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-}
-
-.dark .gallery {
-  background: linear-gradient(135deg, #1a2f4a 0%, #0f172a 100%);
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+.gallery:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Badge Positioning */
 .gallery-badge {
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.light .gallery-badge {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-}
-
-.dark .gallery-badge {
-  background: linear-gradient(135deg, #0f172a 0%, #1a2f4a 100%);
-  border-color: rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: var(--bg-secondary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-dark);
 }
 
 .gallery-badge img {
@@ -83,17 +68,15 @@
   width: 200px;
   height: 200px;
   opacity: 1;
-  border: 3px solid #3b82f6;
+  border: 2px solid #6366f1;
   z-index: 10;
   position: relative;
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
 }
 
-.light .center-badge {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
-}
-
-.dark .center-badge {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+.center-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
 }
 
 /* Right Badge - Dimmed */
@@ -104,46 +87,6 @@
   transform: scale(0.8);
 }
 
-/* ============================================================
-   NAVIGATION ARROWS – COMMENTED OUT (enable later if needed)
-   ============================================================ */
-/*
-.gallery-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 5;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-}
-
-.gallery-arrow:hover {
-  background-color: #2563eb;
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.gallery-arrow.left {
-  left: 20px;
-}
-
-.gallery-arrow.right {
-  right: 20px;
-}
-*/
-
 /* Certificate Info */
 .cert-info {
   text-align: center;
@@ -151,21 +94,20 @@
 }
 
 .cert-info h3 {
-  font-size: 24px;
+  font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .cert-info p {
-  font-size: 14px;
-  opacity: 0.75;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
 
-/* ============================================================
-   ENHANCED BUTTONS – Primary & Secondary
-   ============================================================ */
+/* Certificate Actions */
 .cert-actions {
   display: flex;
   gap: 1rem;
@@ -174,83 +116,77 @@
   margin-bottom: 1.5rem;
 }
 
-/* Primary Button – "View Certificate" */
+/* 
+   ===== BUTTON OVERRIDES - Kill global underline ===== 
+*/
+.verify-btn,
+.verify-link,
+.verify-link-modal,
+.modal-close,
+.carousel-btn {
+  text-decoration: none !important;
+}
+
+.verify-btn::after,
+.verify-link::after,
+.verify-link-modal::after,
+.modal-close::after,
+.carousel-btn::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Primary Button - Gradient */
 .verify-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 12px 28px;
-  background-color: #3b82f6;
+  background: var(--gradient-main);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 60px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 .verify-btn:hover {
-  background-color: #2563eb;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
 }
 
-.verify-btn:active {
-  transform: translateY(0px);
-}
-
-/* Secondary Button – "Verify →" */
+/* Secondary Button - Outlined */
 .verify-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 12px 28px;
-  background-color: transparent;
-  color: #3b82f6;
-  text-decoration: none;
+  background: transparent;
+  color: var(--text-primary);
   font-weight: 600;
-  font-size: 14px;
-  border: 2px solid #3b82f6;
-  border-radius: 10px;
+  font-size: 0.9rem;
+  border: 1.5px solid var(--border-dark);
+  border-radius: 60px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .verify-link:hover {
-  background-color: #3b82f6;
-  color: white;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
-  transform: translateY(-2px);
-}
-
-.verify-link:active {
-  transform: translateY(0px);
-}
-
-/* Dark mode buttons */
-.dark .verify-btn {
-  background-color: #2563eb;
-}
-
-.dark .verify-btn:hover {
-  background-color: #3b82f6;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-}
-
-.dark .verify-link {
-  color: #60a5fa;
-  border-color: #60a5fa;
-}
-
-.dark .verify-link:hover {
-  background-color: #60a5fa;
-  color: #0f172a;
-  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.3);
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.05);
+  color: #6366f1;
+  transform: translateY(-3px);
 }
 
 /* Certificate Counter */
 .cert-counter {
-  font-size: 13px;
-  opacity: 0.6;
-  letter-spacing: 0.3px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -262,7 +198,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,25 +208,20 @@
   padding: 20px;
 }
 
-/* Modal Popup */
+/* Modal Popup - Glassmorphism */
 .cert-modal {
   position: relative;
   max-width: 600px;
   width: 100%;
-  border-radius: 16px;
-  padding: 2rem;
+  border-radius: 24px;
+  padding: 2.5rem;
   max-height: 90vh;
   overflow-y: auto;
-}
-
-.light .cert-modal {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-}
-
-.dark .cert-modal {
-  background: linear-gradient(135deg, #1a2f4a 0%, #0f172a 100%);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Modal Close Button */
@@ -300,30 +233,30 @@
   height: 40px;
   border-radius: 50%;
   border: none;
-  background-color: #3b82f6;
+  background: #6366f1;
   color: white;
   font-size: 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 .modal-close:hover {
-  background-color: #2563eb;
-  transform: scale(1.1);
+  background: #4f46e5;
+  transform: scale(1.1) rotate(90deg);
 }
 
 /* Certificate Image in Modal */
 .cert-image {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: none;
+  border: 1px solid var(--border-dark);
 }
 
 /* Modal Info */
@@ -332,212 +265,100 @@
 }
 
 .modal-info h3 {
-  font-size: 22px;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.3px;
+  color: var(--text-primary);
 }
 
 .modal-info p {
-  font-size: 14px;
-  opacity: 0.75;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
 
-/* Modal Verify Button – consistent with primary */
+/* Modal Verify Button */
 .verify-link-modal {
   display: inline-block;
   padding: 12px 28px;
-  background-color: #3b82f6;
+  background: var(--gradient-main);
   color: white;
-  text-decoration: none;
-  border-radius: 10px;
+  border-radius: 60px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 .verify-link-modal:hover {
-  background-color: #2563eb;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
 }
 
-/* Dark mode modal verify */
-.dark .verify-link-modal {
-  background-color: #2563eb;
-}
-
-.dark .verify-link-modal:hover {
-  background-color: #3b82f6;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-}
-
-/* Dark mode text colors */
-.dark .cert-info h3,
-.dark .modal-info h3 {
-  color: #f1f5f9;
-}
-
-.dark .cert-info p,
-.dark .modal-info p {
-  color: #cbd5e1;
-}
-
-.dark .cert-counter {
-  color: #94a3b8;
-}
-
-/* Lazy loading fade-in */
-.gallery-badge img,
-.cert-image {
-  transition: opacity 0.2s ease-in-out;
-  opacity: 1;
-}
-
-/* ============================================================
-   RESPONSIVE – LARGER BADGES, TIGHTER PADDING
-   ============================================================ */
-
-/* Tablets (max-width: 768px) */
+/* Responsive */
 @media (max-width: 768px) {
-  .certifications {
-    padding: 80px 16px;
-  }
-
   .gallery {
     gap: 1.5rem;
     padding: 2rem 1.2rem;
     min-height: 320px;
+    border-radius: 20px;
   }
-
+  
   .center-badge {
     width: 170px;
     height: 170px;
   }
-
+  
   .left-badge,
   .right-badge {
     width: 85px;
     height: 85px;
   }
-
-  /* Arrow buttons – commented out
-  .gallery-arrow {
-    width: 42px;
-    height: 42px;
-    font-size: 20px;
-  }
-  .gallery-arrow.left {
-    left: 12px;
-  }
-  .gallery-arrow.right {
-    right: 12px;
-  }
-  */
-
+  
   .cert-info h3 {
-    font-size: 20px;
+    font-size: 1.1rem;
   }
-
-  .cert-info p {
-    font-size: 13px;
-  }
-
+  
   .cert-modal {
     padding: 1.5rem;
-  }
-
-  .modal-info h3 {
-    font-size: 20px;
-  }
-
-  .verify-btn,
-  .verify-link {
-    padding: 10px 20px;
-    font-size: 13px;
+    border-radius: 20px;
   }
 }
 
-/* Phones (max-width: 480px) */
 @media (max-width: 480px) {
-  .certifications {
-    padding: 60px 10px;
-  }
-
   .gallery {
     gap: 1rem;
-    padding: 1.5rem 0.6rem;
+    padding: 1.5rem 0.8rem;
     min-height: 280px;
-    border-radius: 12px;
+    border-radius: 16px;
   }
-
+  
   .center-badge {
     width: 150px;
     height: 150px;
-    border-width: 2.5px;
   }
-
+  
   .left-badge,
   .right-badge {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
   }
-
-  /* Arrow buttons – commented out
-  .gallery-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
-  .gallery-arrow.left {
-    left: 6px;
-  }
-  .gallery-arrow.right {
-    right: 6px;
-  }
-  */
-
-  .cert-info {
-    margin-top: 1.5rem;
-  }
-
+  
   .cert-info h3 {
-    font-size: 18px;
+    font-size: 1rem;
   }
-
+  
   .cert-info p {
-    font-size: 12px;
-    margin-bottom: 1rem;
+    font-size: 0.8rem;
   }
-
-  .cert-actions {
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-  }
-
-  .verify-btn {
-    padding: 10px 18px;
-    font-size: 12px;
-    border-radius: 8px;
-  }
-
-  .verify-link {
-    padding: 10px 18px;
-    font-size: 12px;
-    border-radius: 8px;
-  }
-
-  .cert-counter {
-    font-size: 11px;
-  }
-
+  
   .cert-modal {
     padding: 1.2rem;
-    border-radius: 12px;
+    border-radius: 16px;
   }
-
+  
   .modal-close {
     top: 1rem;
     right: 1rem;
@@ -545,49 +366,21 @@
     height: 34px;
     font-size: 16px;
   }
-
+  
   .modal-info h3 {
-    font-size: 18px;
+    font-size: 1rem;
   }
-
-  .modal-info p {
-    font-size: 12px;
-    margin-bottom: 1rem;
-  }
-
-  .verify-link-modal {
-    padding: 10px 18px;
-    font-size: 12px;
-    border-radius: 8px;
-  }
-}
-
-/* Extra small phones (max-width: 360px) */
-@media (max-width: 360px) {
-  .gallery {
-    gap: 0.8rem;
-    padding: 1.2rem 0.4rem;
-    min-height: 240px;
-  }
-
-  .center-badge {
-    width: 130px;
-    height: 130px;
-  }
-
-  .left-badge,
-  .right-badge {
-    width: 65px;
-    height: 65px;
-  }
-
-  .cert-info h3 {
-    font-size: 16px;
-  }
-
+  
   .verify-btn,
   .verify-link {
-    padding: 8px 14px;
-    font-size: 11px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cert-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

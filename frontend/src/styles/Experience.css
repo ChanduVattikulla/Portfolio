@@ -1,14 +1,9 @@
-/* Experience Section – Timeline Layout */
+/* Experience Section – Ultra-Clean Timeline (No Rings, No Pulses) */
 .experience {
-  padding: 100px 20px;
-}
-.experience.light {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-}
-.experience.dark {
-  background: linear-gradient(135deg, #0f172a 0%, #1a2f4a 100%);
+  padding: clamp(3rem, 6vh, 6rem) 0;
 }
 
+/* Timeline Container */
 .experience-timeline {
   max-width: 860px;
   margin: 0 auto;
@@ -18,418 +13,327 @@
   position: relative;
 }
 
-/* Timeline accent line (left side) */
+/* 
+   ===== SOLID VERTICAL LINE ===== 
+   - Gradient colored, completely static
+*/
 .experience-timeline::before {
   content: '';
   position: absolute;
   left: 0;
   top: 1rem;
   bottom: 1rem;
-  width: 2px;
-  background: linear-gradient(to bottom, #3b82f6, transparent);
+  width: 2.5px;
+  background: var(--gradient-main);
   border-radius: 2px;
-}
-.dark .experience-timeline::before {
-  background: linear-gradient(to bottom, #60a5fa, transparent);
+  opacity: 0.3;
+  transition: none;
 }
 
-/* Card – compact, no heavy background, subtle border */
+/* Timeline Card – Premium Glassmorphism */
 .timeline-card {
   position: relative;
-  padding: 1.2rem 1.2rem 1.2rem 2rem;
+  padding: 1.5rem 1.5rem 1.5rem 2.5rem;
   margin-left: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 4px 14px rgba(180, 120, 70, 0.12);
-  transition: all 0.2s ease;
-}
-.dark .timeline-card {
-  background: rgba(18, 25, 45, 0.7);
-  border-color: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 4px 16px rgba(255, 160, 50, 0.10), 0 0 0 1px rgba(255, 160, 50, 0.04);
-}
-.timeline-card:hover {
-  transform: translateY(-3px);
-  border-color: #3b82f6;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 12px 25px -10px rgba(0, 0, 0, 0.08);
-}
-.dark .timeline-card:hover {
-  background: rgba(18, 25, 45, 0.85);
-  box-shadow: 0 12px 25px -10px rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Top row: role + actions */
+/* 
+   ===== THE DOT (Only element on the timeline) ===== 
+   - Perfectly centered on the line
+   - NO ring, NO pulse, NO scaling
+   - Just a beautiful, solid gradient dot
+*/
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: -26px; /* Center on the line (margin-left: 2rem = 32px, dot width 12px -> -32 + 6 = -26) */
+  top: 1.8rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gradient-main);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  transition: box-shadow 0.4s ease; /* ONLY the shadow transitions */
+  z-index: 2;
+  /* Absolutely NO transform, NO scaling, NO movement */
+}
+
+/* 
+   ===== HOVER EFFECTS ===== 
+   - Card lifts UP smoothly
+   - Dot ONLY gets a brighter glow (expanding shadow) – no movement!
+*/
+.timeline-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-card-hover);
+}
+
+/* Dot glow expands outward like a halo – stays perfectly still */
+.timeline-card:hover::before {
+  box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.15), 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================================
+   ===== REST OF THE CONTENT (Unchanged & Premium) =====
+   ============================================================ */
+
 .card-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-bottom: 0.5rem;
 }
+
 .role-group {
   display: flex;
   align-items: center;
   gap: 0.8rem;
 }
+
 .exp-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(59, 130, 246, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  flex-shrink: 0;
 }
+
 .exp-role {
   font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.3px;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.02em;
 }
-.dark .exp-role {
-  color: #f1f5f9;
-}
+
 .action-group {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
+
 .issue-date {
-  font-size: 0.7rem;
-  color: #475569; /* was #64748b – darker */
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
-.dark .issue-date {
-  color: #94a3b8;
-}
+
 .action-buttons {
   display: flex;
   gap: 0.5rem;
 }
+
 .action-btn {
   background: transparent;
-  border: 1px solid #cbd5e1;
-  padding: 4px 12px;
+  border: 1px solid var(--border-dark);
+  padding: 4px 14px;
   border-radius: 30px;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  color: #3b82f6;
-  transition: all 0.2s;
-}
-.dark .action-btn {
-  border-color: #475569;
-  color: #60a5fa;
-}
-.action-btn:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: white;
-  transform: translateY(-1px);
+  color: #6366f1;
+  transition: all 0.3s ease;
 }
 
-/* Subheader – muted meta */
+.action-btn:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+  transform: translateY(-2px);
+}
+
 .card-subheader {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   align-items: center;
   margin-bottom: 0.75rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: #334155; /* was #64748b – darker */
+  color: var(--text-secondary);
 }
+
 .company {
-  color: #2563eb; /* was #3b82f6 – deeper blue */
+  color: #6366f1;
   font-weight: 600;
 }
+
 .meta-badge {
-  background: rgba(59, 130, 246, 0.08);
-  padding: 2px 8px;
+  background: rgba(99, 102, 241, 0.08);
+  padding: 2px 10px;
   border-radius: 30px;
+  font-size: 0.7rem;
 }
+
 .duration {
-  color: #475569; /* was #64748b – darker */
-}
-.dark .card-subheader {
-  color: #94a3b8;
-}
-.dark .meta-badge {
-  background: rgba(59, 130, 246, 0.15);
-}
-.dark .duration {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
-/* Description */
 .exp-description {
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.7;
   margin-bottom: 0.8rem;
-  color: #0f172a; /* was #1e293b – darker */
-  word-break: break-word;
-}
-.dark .exp-description {
-  color: #cbd5e1;
+  color: var(--text-secondary);
 }
 
-/* Tech stack – label + inline */
 .tech-stack {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-bottom: 0.7rem;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
+
 .tech-label {
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: #475569; /* was #64748b – darker */
-}
-.tech-items {
-  color: #1e293b; /* was #334155 – darker */
-}
-.dark .tech-items {
-  color: #cbd5e1;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-/* Achievements – no extra icons, just text */
+.tech-items {
+  color: var(--text-secondary);
+}
+
 .achievements-list {
   list-style: none;
   padding-left: 0;
   margin: 0 0 0.6rem 0;
 }
+
 .achievements-list li {
-  font-size: 0.8rem;
-  margin-bottom: 0.2rem;
-  color: #1e293b; /* was #334155 – darker */
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-secondary);
   display: flex;
   align-items: baseline;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
+
 .achievements-list li::before {
-  content: "✓";
+  content: "✦";
   font-size: 0.7rem;
-  color: #2563eb; /* was #3b82f6 – deeper blue */
-  opacity: 0.8; /* was 0.7 – slightly more visible */
-}
-.dark .achievements-list li {
-  color: #cbd5e1;
+  color: #6366f1;
+  opacity: 0.8;
 }
 
-/* Outcome – subtle */
 .outcome {
-  font-size: 0.8rem;
-  margin-top: 0.3rem;
-  padding-top: 0.4rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  color: #334155; /* was #475569 – darker */
-}
-.dark .outcome {
-  border-top-color: rgba(255, 255, 255, 0.05);
-  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-dark);
+  color: var(--text-muted);
 }
 
-/* ===== MEDIA QUERIES ===== */
-
-/* Tablets & small laptops (max-width: 768px) */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .experience {
-    padding: 80px 20px;
-  }
   .experience-timeline::before {
     left: 8px;
   }
+  
   .timeline-card {
     margin-left: 1.5rem;
-    padding: 1rem;
+    padding: 1.2rem;
   }
+  
+  /* Recalculate dot position for tablet (margin-left: 24px) */
+  .timeline-card::before {
+    left: -18px; /* -24px + 6px = -18px */
+    top: 1.4rem;
+    width: 10px;
+    height: 10px;
+  }
+  
   .card-top {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.4rem;
   }
+  
   .action-group {
-    align-self: flex-start;
-    margin-top: 0;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     width: 100%;
+    flex-wrap: wrap;
   }
-  .tech-stack {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-  .timeline-card::before {
-    left: -20px;
-    top: 1.4rem;
-    width: 6px;
-    height: 6px;
-  }
-  .timeline-card::after {
-    left: -24px;
-    top: 1rem;
-    width: 14px;
-    height: 14px;
+  
+  .exp-role {
+    font-size: 1rem;
   }
 }
 
-/* Existing duplicate block for .exp-two-columns – kept untouched */
-@media (max-width: 768px) {
-  .exp-two-columns {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .exp-two-columns::before {
-    display: none;
-  }
-  .exp-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-  .exp-card {
-    padding: 1rem;
-  }
-  .exp-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .exp-btn {
-    padding: 0.3rem 0.8rem;
-    font-size: 0.7rem;
-  }
-}
-
-/* Sleek modern timeline dot */
-.timeline-card::before {
-  content: '';
-  position: absolute;
-  left: -26px;
-  top: 1.8rem;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #3b82f6;
-  box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3);
-  transition: all 0.3s ease;
-}
-
-/* Subtle glow ring around dot */
-.timeline-card::after {
-  content: '';
-  position: absolute;
-  left: -30px;
-  top: 1.4rem;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(59, 130, 246, 0.15);
-  background: transparent;
-  transition: all 0.4s ease;
-  pointer-events: none;
-}
-
-/* Dark mode for timeline dot */
-.dark .timeline-card::before {
-  background: #60a5fa;
-  box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.3);
-}
-.dark .timeline-card::after {
-  border-color: rgba(96, 165, 250, 0.15);
-}
-
-/* Hover animation */
-.timeline-card:hover::before {
-  transform: scale(1.3);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-}
-.timeline-card:hover::after {
-  transform: scale(1.1);
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-/* ===== EXTRA SMALL SCREENS (max-width: 480px) ===== */
 @media (max-width: 480px) {
-  .experience {
-    padding: 60px 4px;  /* reduced from 12px → 4px (tighter) */
-  }
   .experience-timeline {
     gap: 1rem;
   }
+  
   .experience-timeline::before {
-    left: 0px;  /* timeline line flush left */
+    left: 4px;
   }
+  
   .timeline-card {
+    margin-left: 0.8rem;
     padding: 0.8rem 0.8rem 0.8rem 1.2rem;
-    margin-left: 0.6rem;  /* reduced from 1.2rem → 0.6rem */
-    border-radius: 14px;
+    border-radius: 16px;
   }
+  
+  /* Recalculate dot position for mobile (margin-left: 13px) */
   .timeline-card::before {
-    left: -12px;  /* adjusted from -16px */
-    top: 1.2rem;
-    width: 5px;
-    height: 5px;
+    left: -7px; /* -13px + 6px = -7px */
+    width: 8px;
+    height: 8px;
   }
-  .timeline-card::after {
-    left: -16px;  /* adjusted from -20px */
-    top: 0.8rem;
-    width: 12px;
-    height: 12px;
+  
+  /* Smaller glow on mobile so it doesn't clip */
+  .timeline-card:hover::before {
+    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.15), 0 0 20px rgba(99, 102, 241, 0.25);
   }
-  .action-group {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.3rem;
-    width: 100%;
-  }
-  .action-buttons {
-    flex-wrap: wrap;
-    gap: 0.3rem;
-  }
+  
   .exp-role {
     font-size: 0.9rem;
   }
+  
   .exp-icon {
-    width: 26px;
-    height: 26px;
-    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
   }
-  .card-subheader {
-    font-size: 0.55rem;
-    gap: 0.25rem;
-  }
+  
   .exp-description {
+    font-size: 0.8rem;
+  }
+  
+  .card-subheader {
     font-size: 0.7rem;
-    line-height: 1.5;
   }
+  
   .tech-stack {
-    font-size: 0.6rem;
-    gap: 0.3rem;
+    font-size: 0.7rem;
   }
-  .tech-label {
-    font-size: 0.5rem;
-  }
+  
   .achievements-list li {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
-  .outcome {
-    font-size: 0.65rem;
-  }
+  
   .action-btn {
-    padding: 2px 8px;
-    font-size: 0.55rem;
-  }
-  .issue-date {
-    font-size: 0.55rem;
+    font-size: 0.6rem;
+    padding: 2px 10px;
   }
 }

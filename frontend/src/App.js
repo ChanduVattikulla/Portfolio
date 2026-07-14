@@ -16,20 +16,24 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Auto-detect system preference
+    // Auto-detect system preference on initial load
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setDarkMode(prefersDark);
   }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prev) => !prev); // Safer toggle
   };
 
   return (
     <div className={darkMode ? 'app dark-mode' : 'app light-mode'}>
+      {/* ⬇️ PREMIUM GRAIN TEXTURE (Required for the new CSS) ⬇️ */}
+      <div className="grain-overlay" aria-hidden="true"></div>
+      {/* ⬆️ Keep this line — it adds the "tactile paper" effect ⬆️ */}
+
       <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
-      <motion.main 
+
+      <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}

@@ -1,29 +1,23 @@
-/* Navigation Bar */
+/* ============================================================
+   NAVBAR - PREMIUM INTEGRATION
+   ============================================================ */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  backdrop-filter: blur(12px);
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
-  padding: 1.2rem 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-dark);
+  padding: 0.8rem 0;
   transition: all 0.3s ease;
+  background: var(--bg-card);
 }
 
-.navbar.light {
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-.navbar.dark {
-  background-color: rgba(15, 23, 42, 0.7);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Navigation Container */
 .nav-container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,23 +26,41 @@
 
 /* Logo */
 .nav-logo {
-  font-family: 'Fira Code', 'JetBrains Mono', Consolas, Monaco, monospace;
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, monospace;
   letter-spacing: 1px;
   font-size: 18px;
   line-height: 1;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: linear-gradient(135deg, #22d3ee, #60a5fa);
+  background: var(--gradient-main);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.4));
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.3));
 }
-
 .nav-logo:hover {
-  opacity: 0.8;
   transform: scale(1.05);
+}
+.nav-logo::before {
+  content: "</";
+  font-weight: 400;
+  color: #6366f1;
+  -webkit-text-fill-color: #6366f1;
+}
+.nav-logo::after {
+  content: ">";
+  font-weight: 400;
+  color: #8b5cf6;
+  -webkit-text-fill-color: #8b5cf6;
+  margin-left: 2px;
+  padding-right: 10px;
+  background: linear-gradient(#8b5cf6, #8b5cf6) no-repeat bottom right;
+  background-size: 8px 2px;
+  animation: blinkCursor 1s step-end infinite;
+}
+@keyframes blinkCursor {
+  50% { background: none; }
 }
 
 /* Desktop Menu */
@@ -58,25 +70,20 @@
   gap: 2.5rem;
   align-items: center;
 }
-
 .nav-link {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: 600;
   transition: all 0.2s ease;
-  opacity: 0.8;
-  letter-spacing: 0.3px;
+  color: var(--text-secondary);
   padding: 0.5rem 0;
   position: relative;
 }
-
 .nav-link:hover {
-  opacity: 1;
-  color: #3b82f6;
+  color: #6366f1;
 }
-
 .nav-link::after {
   content: '';
   position: absolute;
@@ -84,212 +91,166 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #3b82f6;
-  transition: width 0.2s ease;
+  background: var(--gradient-main);
+  transition: width 0.3s ease;
 }
-
 .nav-link:hover::after {
   width: 100%;
 }
 
-/* Dark Mode Toggle */
+/* ============================================================
+   RIGHT SIDE - anchor point for the expanding panel
+   ============================================================ */
+.nav-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: relative; /* critical: dropdown-menu anchors to this box */
+}
+
 .theme-toggle {
   background: none;
   border: none;
   font-size: 22px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  opacity: 0.8;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  opacity: 0.7;
+  position: relative;
+  z-index: 1; /* sits under the expanding panel when it's open */
 }
-
 .theme-toggle:hover {
   opacity: 1;
   transform: rotate(20deg) scale(1.1);
 }
 
-/* Hamburger Menu Toggle (Mobile) */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  opacity: 0.8;
-  transition: all 0.2s ease;
+  color: var(--text-primary);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1002; /* always on top so it stays clickable to close */
 }
-
 .menu-toggle:hover {
   opacity: 1;
 }
 
-/* Mobile Menu */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  padding: 1.5rem;
-  flex-direction: column;
-  gap: 1rem;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
-}
-
-.light .mobile-menu {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-}
-
-.dark .mobile-menu {
-  background-color: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-}
-
-.mobile-nav-link {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border-radius: 8px;
-}
-
-.mobile-nav-link:hover {
-  background-color: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-}
-
-/* Responsive Design */
+/* ============================================================
+   RESPONSIVE - SHOW HAMBURGER ON MOBILE
+   ============================================================ */
 @media (max-width: 768px) {
   .nav-container {
     padding: 0 20px;
   }
-
   .nav-menu {
     display: none;
   }
-
   .menu-toggle {
     display: block;
   }
-
-  .mobile-menu {
-    display: flex;
-  }
-
-  .nav-logo {
-    font-size: 18px;
-  }
-
-  .theme-toggle {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-container {
-    padding: 0 15px;
-  }
-
   .nav-logo {
     font-size: 16px;
-  }
-
-  .theme-toggle {
-    font-size: 18px;
-  }
-
-  .menu-toggle {
-    font-size: 20px;
-  }
-}
-.navbar.dark .nav-logo {
-  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
-}
-/* Fix nav link text color in dark mode */
-.navbar.dark .nav-link {
-  color: #f1f5f9;
-}
-
-/* Fix theme toggle button icon in dark mode */
-.navbar.dark .theme-toggle {
-  color: #f1f5f9;
-}
-
-/* Fix hamburger menu icon in dark mode */
-.navbar.dark .menu-toggle {
-  color: #f1f5f9;
-}
-/* Fix mobile nav link text color in dark mode */
-.navbar.dark .mobile-nav-link {
-  color: #f1f5f9;
-}
-.nav-right {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .nav-container {
-    justify-content: space-between;
   }
   .nav-right {
     gap: 0.8rem;
   }
 }
-/* --- DARK MODE LOGO BRACKETS & BLINK ENGINE --- */
-.nav-logo::before {
-  content: "</";
-  font-weight: 400;
-  color: #06b6d4;
-}
-
-.nav-logo::after {
-  content: ">";
-  font-weight: 400;
-  color: #38bdf8;
-  margin-left: 2px;
-  padding-right: 10px;
-  background: linear-gradient(#38bdf8, #38bdf8) no-repeat bottom right;
-  background-size: 8px 2px;
-  animation: blinkCursor 1s step-end infinite;
-}
-
-@keyframes blinkCursor {
-  50% { background: none; }
-}
-
-/* --- LIGHT MODE SWITCH OVERRIDES --- */
-.navbar.light .nav-logo {
-  background: linear-gradient(135deg, #059669, #047857); 
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: none;
-}
-
-.navbar.light .nav-logo::before {
-  color: #059669;
-}
-
-.navbar.light .nav-logo::after {
-  color: #059669;
-  background: linear-gradient(#059669, #059669) no-repeat bottom 1px right;
-  background-size: 8px 2px;
-}
-/* Responsive – dynamic units */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .nav-container {
-    padding: 0 1rem;
+    padding: 0 14px;
   }
   .nav-logo {
-    font-size: 1rem;
+    font-size: 14px;
   }
-  .mobile-menu {
-    padding: 0.8rem;
+}
+
+/* ============================================================
+   OVERLAY - dims the page behind everything
+   ============================================================ */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ============================================================
+   EXPANDING PANEL
+   Anchored at the exact top-right corner of .nav-right,
+   so it grows LEFT and DOWN out of the icon cluster instead
+   of appearing as a separate box underneath it.
+   ============================================================ */
+.dropdown-menu {
+  position: absolute;
+  top: -12px;     /* aligns with the icon row, slightly overlapping it */
+  right: -12px;   /* aligns with the right edge of the hamburger icon */
+  z-index: 1000;  /* above theme-toggle, below menu-toggle */
+  width: 220px;
+  padding: 2.6rem 0.5rem 0.8rem; /* extra top padding clears the icon row */
+  border-radius: 20px 4px 20px 20px; /* flattened top-right corner = grows from that point */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  transform-origin: top right; /* THIS is what makes it expand left + down */
+}
+
+/* Light mode dropdown */
+.navbar.light .dropdown-menu {
+  background: rgba(255, 255, 255, 0.97);
+}
+
+/* Dark mode dropdown */
+.navbar.dark .dropdown-menu {
+  background: rgba(15, 23, 42, 0.97);
+}
+
+/* Links container */
+.dropdown-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+/* Individual links */
+.dropdown-nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  width: 100%;
+}
+.dropdown-nav-link:hover {
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+}
+
+/* Small screen tweaks */
+@media (max-width: 480px) {
+  .dropdown-menu {
+    width: 200px;
+    top: -10px;
+    right: -10px;
+    padding: 2.4rem 0.4rem 0.6rem;
+  }
+  .dropdown-nav-link {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
   }
 }
