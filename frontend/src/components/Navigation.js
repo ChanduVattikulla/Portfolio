@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/Navigation.css';
 
-// ✅ Added "Home" at the beginning
-  const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
+// ✅ Moved outside component (stable constant)
+const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
+
 const Navigation = ({ darkMode, toggleDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-
-  
 
   // ✅ Map display names to actual section IDs
   const getSectionId = (link) => {
@@ -48,7 +47,7 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navLinks]);
+  }, []); // ✅ FIX: removed navLinks from deps (it's stable outside component)
 
   const scrollToSection = (section) => {
     const id = getSectionId(section);
