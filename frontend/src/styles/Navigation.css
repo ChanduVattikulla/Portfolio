@@ -98,6 +98,15 @@
   width: 100%;
 }
 
+/* ✅ NEW: Active state – underline ONLY, NO color change */
+.nav-link.active {
+  color: var(--text-secondary); /* Keeps default color, same as inactive */
+}
+
+.nav-link.active::after {
+  width: 100%; /* Underline stays visible */
+}
+
 /* ============================================================
    RIGHT SIDE - anchor point for the expanding panel
    ============================================================ */
@@ -105,7 +114,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  position: relative; /* critical: dropdown-menu anchors to this box */
+  position: relative;
 }
 
 .theme-toggle {
@@ -117,7 +126,7 @@
   color: var(--text-primary);
   opacity: 0.7;
   position: relative;
-  z-index: 1; /* sits under the expanding panel when it's open */
+  z-index: 1;
 }
 .theme-toggle:hover {
   opacity: 1;
@@ -134,7 +143,7 @@
   opacity: 0.7;
   transition: all 0.3s ease;
   position: relative;
-  z-index: 1002; /* always on top so it stays clickable to close */
+  z-index: 1002;
 }
 .menu-toggle:hover {
   opacity: 1;
@@ -186,43 +195,36 @@
 
 /* ============================================================
    EXPANDING PANEL
-   Anchored at the exact top-right corner of .nav-right,
-   so it grows LEFT and DOWN out of the icon cluster instead
-   of appearing as a separate box underneath it.
    ============================================================ */
 .dropdown-menu {
   position: absolute;
-  top: -12px;     /* aligns with the icon row, slightly overlapping it */
-  right: -12px;   /* aligns with the right edge of the hamburger icon */
-  z-index: 1000;  /* above theme-toggle, below menu-toggle */
+  top: -12px;
+  right: -12px;
+  z-index: 1000;
   width: 220px;
-  padding: 2.6rem 0.5rem 0.8rem; /* extra top padding clears the icon row */
-  border-radius: 20px 4px 20px 20px; /* flattened top-right corner = grows from that point */
+  padding: 2.6rem 0.5rem 0.8rem;
+  border-radius: 20px 4px 20px 20px;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-light);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-  transform-origin: top right; /* THIS is what makes it expand left + down */
+  transform-origin: top right;
 }
 
-/* Light mode dropdown */
 .navbar.light .dropdown-menu {
   background: rgba(255, 255, 255, 0.97);
 }
 
-/* Dark mode dropdown */
 .navbar.dark .dropdown-menu {
   background: rgba(15, 23, 42, 0.97);
 }
 
-/* Links container */
 .dropdown-links {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
 }
 
-/* Individual links */
 .dropdown-nav-link {
   background: none;
   border: none;
@@ -241,7 +243,12 @@
   color: #6366f1;
 }
 
-/* Small screen tweaks */
+/* ✅ Mobile active state – subtle background instead of underline */
+.dropdown-nav-link.active {
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+}
+
 @media (max-width: 480px) {
   .dropdown-menu {
     width: 200px;

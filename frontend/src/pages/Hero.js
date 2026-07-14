@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Hero.css';
 
-// ✅ Moved outside component – stable reference
-const ROLES = [
-  'Full-Stack Developer & AI Enthusiast',
-  'React & Python Specialist',
-  'Cloud & AI Engineer',
-  'Open Source Contributor'
-];
-
 const Hero = ({ darkMode }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  const roles = [
+    'Full-Stack Developer & AI Enthusiast',
+    'React & Python Specialist',
+    'Cloud & AI Engineer',
+    'Open Source Contributor'
+  ];
+
   useEffect(() => {
-    const currentRole = ROLES[currentIndex];
+    const currentRole = roles[currentIndex];
     let timeout;
 
     if (isPaused) {
+      // Pause after typing is complete (1.5s)
       timeout = setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
@@ -29,10 +29,10 @@ const Hero = ({ darkMode }) => {
     }
 
     if (isDeleting) {
-      // Snap deletion - clear instantly
+      // ✅ SNAP DELETION: Clear everything instantly
       setDisplayText('');
       setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % ROLES.length);
+      setCurrentIndex((prev) => (prev + 1) % roles.length);
       return;
     } else {
       // Typing forward
@@ -46,7 +46,7 @@ const Hero = ({ darkMode }) => {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentIndex, isPaused]); // ✅ ROLES is now stable (no need in deps)
+  }, [displayText, isDeleting, currentIndex, isPaused, roles]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -90,7 +90,7 @@ const Hero = ({ darkMode }) => {
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
             >
-              View My Work
+              Explore My Work
             </motion.button>
             <motion.button 
               className="btn btn-secondary"
@@ -98,7 +98,7 @@ const Hero = ({ darkMode }) => {
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('/Chandu_Vattikulla_Resume.pdf', '_blank')}
             >
-              Download Resume
+              Get My Resume
             </motion.button>
           </motion.div>
         </motion.div>

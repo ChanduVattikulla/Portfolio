@@ -73,7 +73,7 @@ const Resume = ({ darkMode }) => {
             whileHover={{ scale: 1.08, boxShadow: '0 10px 30px rgba(59, 130, 246, 0.4)' }}
             whileTap={{ scale: 0.95 }}
           >
-            ⬇️ Download Full Resume
+            📄 Grab My Resume
           </motion.a>
           <p className="download-hint">PDF • Updated regularly</p>
         </motion.div>

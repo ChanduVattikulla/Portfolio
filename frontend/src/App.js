@@ -8,9 +8,11 @@ import Stats from './pages/Stats';
 import Skills from './pages/Skills';
 import Experience from './pages/Experience';
 import Projects from './pages/Projects';
+import Education from './pages/Education';
 import Certifications from './pages/Certifications';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -44,6 +46,7 @@ function App() {
         <Skills darkMode={darkMode} />
         <Experience darkMode={darkMode} />
         <Projects darkMode={darkMode} />
+        <Education darkMode={darkMode} />
         <Certifications darkMode={darkMode} />
         <Resume darkMode={darkMode} />
         <Contact darkMode={darkMode} />

@@ -17,7 +17,7 @@ const Stats = ({ darkMode }) => {
       link: 'https://github.com/ChanduVattikulla'
     },
     { 
-      label: 'Certifications',
+      label: 'Skills Certified',
       target: 12,
       current: 0,
       link: '#certifications'
@@ -63,7 +63,7 @@ const Stats = ({ darkMode }) => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          By The Numbers
+          The Numbers That Define My Journey
         </motion.h2>
 
         <motion.p 
@@ -73,7 +73,7 @@ const Stats = ({ darkMode }) => {
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          Real achievements backed by real work
+          Every number represents a challenge conquered
         </motion.p>
 
         <div className="stats-grid">

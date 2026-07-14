@@ -1,14 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/Navigation.css';
 
 const Navigation = ({ darkMode, toggleDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
-  const navLinks = ['About', 'Skills', 'Experience', 'Projects', 'Certifications', 'Resume', 'Contact'];
+  // ✅ Added "Home" at the beginning
+  const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
+
+  // ✅ Map display names to actual section IDs
+  const getSectionId = (link) => {
+    return link.toLowerCase() === 'home' ? 'hero' : link.toLowerCase();
+  };
+
+  // ✅ Scroll tracking with bottom detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 120;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // If scrolled to the bottom, set active to Contact
+      if (scrollPosition + windowHeight >= documentHeight - 10) {
+        const lastSection = navLinks[navLinks.length - 1].toLowerCase();
+        setActiveSection(lastSection);
+        return;
+      }
+
+      let currentSection = 'home';
+
+      for (let i = navLinks.length - 1; i >= 0; i--) {
+        const link = navLinks[i];
+        const sectionId = getSectionId(link);
+        const element = document.getElementById(sectionId);
+        if (element && scrollPosition >= element.offsetTop) {
+          currentSection = link.toLowerCase();
+          break;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [navLinks]);
 
   const scrollToSection = (section) => {
-    const element = document.getElementById(section.toLowerCase());
+    const id = getSectionId(section);
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setMenuOpen(false);
@@ -30,25 +73,25 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
           <ul className="nav-menu">
             {navLinks.map((link) => (
               <li key={link}>
-                <button className="nav-link" onClick={() => scrollToSection(link)}>
+                <button
+                  className={`nav-link ${activeSection === link.toLowerCase() ? 'active' : ''}`}
+                  onClick={() => scrollToSection(link)}
+                >
                   {link}
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* nav-right is now the anchor point - the panel expands FROM here */}
           <div className="nav-right">
             <button onClick={toggleDarkMode} className="theme-toggle" aria-label="Toggle theme">
               {darkMode ? '☀' : '☽'}
             </button>
 
-            {/* Hamburger stays on top (highest z-index) so it's always clickable to close */}
             <button className="menu-toggle" onClick={toggleMenu}>
               {menuOpen ? '✕' : '☰'}
             </button>
 
-            {/* Expanding panel - anchored top-right, grows left & down over the icons */}
             <AnimatePresence>
               {menuOpen && (
                 <motion.div
@@ -62,7 +105,7 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
                     {navLinks.map((link, index) => (
                       <motion.button
                         key={link}
-                        className="dropdown-nav-link"
+                        className={`dropdown-nav-link ${activeSection === link.toLowerCase() ? 'active' : ''}`}
                         onClick={() => scrollToSection(link)}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -79,7 +122,6 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
         </div>
       </nav>
 
-      {/* Overlay stays separate, just dims the page background */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
