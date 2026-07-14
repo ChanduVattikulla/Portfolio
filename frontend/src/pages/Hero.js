@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Hero.css';
 
+// ✅ Moved outside component – stable reference
+const ROLES = [
+  'Full-Stack Developer & AI Enthusiast',
+  'React & Python Specialist',
+  'Cloud & AI Engineer',
+  'Open Source Contributor'
+];
+
 const Hero = ({ darkMode }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  const roles = [
-    'Full-Stack Developer & AI Enthusiast',
-    'React & Python Specialist',
-    'Cloud & AI Engineer',
-    'Open Source Contributor'
-  ];
-
   useEffect(() => {
-    const currentRole = roles[currentIndex];
+    const currentRole = ROLES[currentIndex];
     let timeout;
 
     if (isPaused) {
-      // Pause after typing is complete (1.5s)
       timeout = setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
@@ -29,10 +29,10 @@ const Hero = ({ darkMode }) => {
     }
 
     if (isDeleting) {
-      // ✅ SNAP DELETION: Clear everything instantly
+      // Snap deletion - clear instantly
       setDisplayText('');
       setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % roles.length);
+      setCurrentIndex((prev) => (prev + 1) % ROLES.length);
       return;
     } else {
       // Typing forward
@@ -46,7 +46,7 @@ const Hero = ({ darkMode }) => {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentIndex, isPaused, roles]);
+  }, [displayText, isDeleting, currentIndex, isPaused]); // ✅ ROLES is now stable (no need in deps)
 
   const containerVariants = {
     hidden: { opacity: 0 },
