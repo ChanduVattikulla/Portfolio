@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/Navigation.css';
 
+// ✅ Added "Home" at the beginning
+  const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
 const Navigation = ({ darkMode, toggleDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // ✅ Added "Home" at the beginning
-  const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
+  
 
   // ✅ Map display names to actual section IDs
   const getSectionId = (link) => {

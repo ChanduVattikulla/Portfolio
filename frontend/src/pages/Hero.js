@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Hero.css';
 
+ const roles = [
+    'Full-Stack Developer & AI Enthusiast',
+    'React & Python Specialist',
+    'Cloud & AI Engineer',
+    'Open Source Contributor'
+  ];
 const Hero = ({ darkMode }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  const roles = [
-    'Full-Stack Developer & AI Enthusiast',
-    'React & Python Specialist',
-    'Cloud & AI Engineer',
-    'Open Source Contributor'
-  ];
+ 
 
   useEffect(() => {
     const currentRole = roles[currentIndex];
