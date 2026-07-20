@@ -383,3 +383,36 @@
     flex: 0 0 calc(100% - 10px);
   }
 }
+/* ============================================================
+   MOBILE: Tech badges – single row, horizontal scroll
+   ============================================================ */
+@media (max-width: 480px) {
+  .tech-stack {
+    display: flex !important;
+    flex-direction: row !important;        /* explicitly row */
+    flex-wrap: nowrap !important;          /* no wrapping */
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-height: none !important;
+    gap: 0.5rem !important;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+  }
+
+  .tech-stack::-webkit-scrollbar {
+    height: 4px;
+  }
+  .tech-stack::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 4px;
+  }
+  .tech-stack::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tech-badge {
+    flex: 0 0 auto !important;            /* prevent grow/shrink */
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+}

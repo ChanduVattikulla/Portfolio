@@ -96,9 +96,19 @@
 }
 
 .stat-card-wrapper {
-  text-decoration: none;
+  text-decoration: none !important;
   color: inherit;
   display: block;
+}
+
+.stat-card-wrapper::after,
+.stat-card-wrapper:hover::after,
+.stat-card-wrapper:focus::after,
+.stat-card-wrapper:active::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .stat-card {

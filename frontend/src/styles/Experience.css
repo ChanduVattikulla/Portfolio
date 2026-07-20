@@ -1,5 +1,5 @@
 /* ============================================================
-   EXPERIENCE SECTION – EDUCATION-INSPIRED PREMIUM TIMELINE
+   EXPERIENCE SECTION – COMPLETE STYLESHEET
    ============================================================ */
 
 .experience {
@@ -7,7 +7,11 @@
   position: relative;
 }
 
-/* ===== LIGHT THEME GLOW ===== */
+/* ============================================================
+   BACKGROUND GLOW ACCENTS
+   ============================================================ */
+
+/* Light Theme Glow */
 .light .experience::before {
   content: '';
   position: absolute;
@@ -32,7 +36,7 @@
   z-index: 0;
 }
 
-/* ===== DARK THEME GLOW ===== */
+/* Dark Theme Glow */
 .dark .experience::before {
   content: '';
   position: absolute;
@@ -62,14 +66,17 @@
   z-index: 1;
 }
 
-/* ===== SECTION HEADER ===== */
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+
 .section-title {
   font-size: clamp(2rem, 2.8vw, 3rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: 0.5rem;
   letter-spacing: -0.03em;
-  background: var(--gradient-main);
+  background: var(--gradient-main, linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -87,26 +94,22 @@
   width: 60px;
   height: 3px;
   border-radius: 2px;
-  background: var(--gradient-main);
+  background: var(--gradient-main, linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%));
   box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
 }
 
 .section-subtitle {
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--text-secondary, #94a3b8);
   font-size: 1.05rem;
   max-width: 500px;
   margin: 1rem auto 2.5rem auto;
-  opacity: 0.7;
+  opacity: 0.8;
   font-weight: 400;
 }
 
 /* ============================================================
-   TIMELINE CONTAINER
-   The line's left edge sits at x:0 of this container's padding
-   box, and is --line-width wide. Everything below is calculated
-   from that single source of truth so the dot always lands
-   exactly on the line's center, at every breakpoint.
+   TIMELINE CONTAINER & RAIL
    ============================================================ */
 
 .experience-timeline {
@@ -140,21 +143,12 @@
   box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
 }
 
-/* ============================================================
-   TIMELINE ITEM
-   ============================================================ */
-
 .experience-item {
   position: relative;
 }
 
 /* ============================================================
-   TIMELINE DOT – EXACTLY LIKE EDUCATION
-   left: -1 * var(--rail) puts the dot's LEFT EDGE exactly on
-   the line's left edge (x:0). translateX(-50%) then re-centers
-   the dot on its own left edge. Nudging by half the line width
-   afterwards lands the dot dead-center on the line, no matter
-   what size the dot is. Change --dot-size and it stays centered.
+   TIMELINE DOT
    ============================================================ */
 
 .timeline-dot {
@@ -178,7 +172,6 @@
   background: #0f172a;
 }
 
-/* Hover = solid fill + color shift + gentle glow, position never moves */
 .experience-item:hover .timeline-dot {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   border-color: #8b5cf6;
@@ -187,7 +180,7 @@
 }
 
 /* ============================================================
-   EXPERIENCE CARD – SHIMMER STAYS INSIDE
+   EXPERIENCE CARD & SHIMMER EFFECTS
    ============================================================ */
 
 .experience-card {
@@ -195,23 +188,23 @@
   margin-left: 0.9rem;
   padding: 1.9rem 2rem;
   border-radius: 20px;
-  background: var(--bg-card);
+  background: var(--bg-card, #0f172a);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-dark);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--shadow-sm, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
 }
 
 .light .experience-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(249, 250, 251, 0.6) 100%);
-  border-color: rgba(99, 102, 241, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(249, 250, 251, 0.7) 100%);
+  border-color: rgba(99, 102, 241, 0.12);
 }
 
 .light .experience-card:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 244, 246, 0.8) 100%);
-  border-color: rgba(99, 102, 241, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(243, 244, 246, 0.85) 100%);
+  border-color: rgba(99, 102, 241, 0.25);
   box-shadow: 0 20px 60px -15px rgba(99, 102, 241, 0.15), 0 0 40px rgba(99, 102, 241, 0.05);
 }
 
@@ -226,7 +219,7 @@
   box-shadow: 0 20px 60px -15px rgba(99, 102, 241, 0.2), 0 0 60px rgba(99, 102, 241, 0.06);
 }
 
-/* ===== SHIMMER EFFECT ===== */
+/* Shimmer Light Reflection */
 .experience-card::before {
   content: '';
   position: absolute;
@@ -234,7 +227,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
+  background: linear-gradient(
+    90deg,
     transparent 0%,
     rgba(99, 102, 241, 0.03) 20%,
     rgba(139, 92, 246, 0.05) 40%,
@@ -247,7 +241,8 @@
 }
 
 .dark .experience-card::before {
-  background: linear-gradient(90deg,
+  background: linear-gradient(
+    90deg,
     transparent 0%,
     rgba(99, 102, 241, 0.06) 20%,
     rgba(139, 92, 246, 0.08) 40%,
@@ -260,14 +255,14 @@
   left: 100%;
 }
 
-/* ===== GRADIENT BORDER ON HOVER ===== */
+/* Gradient Border Mask on Hover */
 .experience-card::after {
   content: '';
   position: absolute;
   inset: -1px;
   border-radius: 20px;
   padding: 1.5px;
-  background: var(--gradient-main);
+  background: var(--gradient-main, linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -281,102 +276,64 @@
 }
 
 .experience-item:hover .experience-card {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: transparent;
 }
 
 /* ============================================================
-   CONTENT – SAME AS EDUCATION WITH EXPERIENCE TWEAKS
+   CARD CONTENT & LAYOUT
    ============================================================ */
 
 .experience-content {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 }
 
+/* Header & Top Row */
 .card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin-bottom: 0.15rem;
 }
 
 .role-group {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .exp-icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
   background: rgba(99, 102, 241, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 22px;
   flex-shrink: 0;
+  border: 1px solid rgba(99, 102, 241, 0.15);
 }
 
 .exp-role {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
+  color: var(--text-primary, #f8fafc);
+  margin: 0 0 0.2rem 0;
   letter-spacing: -0.02em;
-}
-
-.action-group {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-}
-
-.issue-date {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.action-btn {
-  background: transparent;
-  border: 1px solid var(--border-dark);
-  padding: 4px 14px;
-  border-radius: 30px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  color: #6366f1;
-  transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-  background: #6366f1;
-  border-color: #6366f1;
-  color: white;
-  transform: translateY(-2px);
 }
 
 .card-subheader {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
   align-items: center;
-  margin-bottom: 0.6rem;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-secondary, #cbd5e1);
 }
 
 .company {
@@ -386,78 +343,185 @@
 
 .meta-badge {
   background: rgba(99, 102, 241, 0.08);
-  padding: 2px 10px;
-  border-radius: 30px;
-  font-size: 0.7rem;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 500;
 }
 
 .duration {
-  color: var(--text-muted);
+  color: var(--text-muted, #64748b);
+  font-size: 0.78rem;
 }
 
-.exp-description {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin-bottom: 0.6rem;
-  color: var(--text-secondary);
-}
-
-.tech-stack {
+/* Actions (Verify & Copy Buttons) */
+.action-group {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
 }
 
-.tech-label {
-  font-size: 0.65rem;
+.issue-date {
+  font-size: 0.72rem;
+  color: var(--text-muted, #64748b);
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--text-muted);
-  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #6366f1;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-.tech-items {
-  color: var(--text-secondary);
+.action-btn::after,
+.action-btn:hover::after,
+.action-btn:focus::after,
+.action-btn:active::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
+
+.action-btn:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+  transform: translateY(-1.5px);
+}
+
+/* Copied Success State */
+.action-btn.copy-btn.copied {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.check-icon {
+  width: 12px;
+  height: 12px;
+  stroke: #10b981;
+}
+
+/* ============================================================
+   ACHIEVEMENTS LIST
+   ============================================================ */
 
 .achievements-list {
   list-style: none;
   padding-left: 0;
-  margin: 0 0 0.4rem 0;
+  margin: 0.4rem 0;
 }
 
 .achievements-list li {
-  font-size: 0.85rem;
-  margin-bottom: 0.25rem;
-  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-bottom: 0.4rem;
+  color: var(--text-secondary, #cbd5e1);
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .achievements-list li::before {
-  content: "✦";
+  content: '✦';
   font-size: 0.7rem;
   color: #6366f1;
-  opacity: 0.8;
-}
-
-.outcome {
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--border-dark);
-  color: var(--text-muted);
+  opacity: 0.85;
+  flex-shrink: 0;
 }
 
 /* ============================================================
-   RESPONSIVE – EXACTLY LIKE EDUCATION
-   Only --rail changes per breakpoint — the dot centering
-   formula uses that variable automatically, so it stays
-   perfectly centered on the line at every screen size.
+   TECH STACK CHIPS
+   ============================================================ */
+
+.tech-stack {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.tech-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
+  color: var(--text-secondary, #cbd5e1);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.light .chip {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+.chip:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ============================================================
+   OUTCOME / KEY IMPACT BANNER
+   ============================================================ */
+
+.outcome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  margin-top: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.05);
+  border-left: 3px solid #6366f1;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.outcome-icon {
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
    ============================================================ */
 
 @media (max-width: 768px) {
@@ -473,39 +537,69 @@
 
   .experience-card {
     margin-left: 0.7rem;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem;
     border-radius: 18px;
+  }
+
+  .card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .action-group {
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .exp-role {
     font-size: 1rem;
   }
 
-  .card-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .action-group {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .exp-description {
-    font-size: 0.85rem;
-  }
-
-  .tech-stack {
-    font-size: 0.75rem;
-  }
-
   .achievements-list li {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 
   .outcome {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  /* Tech Stack - Horizontal Scroll on Tablet */
+  .tech-stack {
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tech-chips {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding-bottom: 0.2rem;
+    max-width: 100%;
+  }
+
+  /* Scrollbar styling for webkit browsers */
+  .tech-chips::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .tech-chips::-webkit-scrollbar-track {
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 10px;
+  }
+
+  .tech-chips::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 10px;
+  }
+
+  .tech-chips::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
   }
 }
 
@@ -527,38 +621,69 @@
   }
 
   .exp-role {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .exp-icon {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-  }
-
-  .exp-description {
-    font-size: 0.8rem;
-    line-height: 1.6;
+    width: 32px;
+    height: 32px;
+    font-size: 17px;
   }
 
   .card-subheader {
-    font-size: 0.7rem;
-  }
-
-  .tech-stack {
-    font-size: 0.7rem;
-  }
-
-  .achievements-list li {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
   .action-btn {
-    font-size: 0.6rem;
-    padding: 2px 10px;
+    font-size: 0.65rem;
+    padding: 3px 10px;
   }
 
-  .outcome {
-    font-size: 0.75rem;
+  /* Tech Stack - Horizontal Scroll on Mobile */
+  .tech-stack {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .tech-label {
+    min-width: fit-content;
+  }
+
+  .tech-chips {
+    flex-wrap: nowrap;
+    gap: 0.3rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding-bottom: 0.2rem;
+    max-width: 100%;
+    padding-right: 0.5rem;
+  }
+
+  /* Scrollbar styling for webkit browsers */
+  .tech-chips::-webkit-scrollbar {
+    height: 2px;
+  }
+
+  .tech-chips::-webkit-scrollbar-track {
+    background: rgba(99, 102, 241, 0.06);
+    border-radius: 10px;
+  }
+
+  .tech-chips::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.25);
+    border-radius: 10px;
+  }
+
+  .tech-chips::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.4);
+  }
+
+  .chip {
+    font-size: 0.68rem;
+    padding: 2px 7px;
   }
 }

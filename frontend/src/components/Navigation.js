@@ -3,62 +3,65 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import '../styles/Navigation.css';
 
-// ✅ Moved outside component (stable constant)
 const navLinks = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Certifications', 'Resume', 'Contact'];
 
 const navMotion = {
-  hidden: { opacity: 0, y: -22 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-};
-
-const linkMotion = {
-  hidden: { opacity: 0, y: -10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: -16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
 };
 
 const Navigation = ({ darkMode, toggleDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
 
-  // ✅ Map display names to actual section IDs
   const getSectionId = (link) => {
     return link.toLowerCase() === 'home' ? 'hero' : link.toLowerCase();
   };
 
-  // ✅ Scroll tracking with bottom detection
+  // Ultra-smooth scroll handler using requestAnimationFrame
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
 
-      // If scrolled to the bottom, set active to Contact
-      if (scrollPosition + windowHeight >= documentHeight - 10) {
-        const lastSection = navLinks[navLinks.length - 1].toLowerCase();
-        setActiveSection(lastSection);
-        return;
+          const scrollPosition = window.scrollY + 120;
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+
+          if (scrollPosition + windowHeight >= documentHeight - 10) {
+            setActiveSection(navLinks[navLinks.length - 1].toLowerCase());
+            ticking = false;
+            return;
+          }
+
+          let current = 'home';
+          for (let i = navLinks.length - 1; i >= 0; i--) {
+            const link = navLinks[i];
+            const sectionId = getSectionId(link);
+            const element = document.getElementById(sectionId);
+            if (element && scrollPosition >= element.offsetTop) {
+              current = link.toLowerCase();
+              break;
+            }
+          }
+
+          setActiveSection(current);
+          ticking = false;
+        });
+
+        ticking = true;
       }
-
-      let currentSection = 'home';
-
-      for (let i = navLinks.length - 1; i >= 0; i--) {
-        const link = navLinks[i];
-        const sectionId = getSectionId(link);
-        const element = document.getElementById(sectionId);
-        if (element && scrollPosition >= element.offsetTop) {
-          currentSection = link.toLowerCase();
-          break;
-        }
-      }
-
-      setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []); // ✅ FIX: removed navLinks from deps (it's stable outside component)
+  }, []);
 
   const scrollToSection = (section) => {
     const id = getSectionId(section);
@@ -69,97 +72,93 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
     }
   };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <>
       <motion.nav
-        className={`navbar ${darkMode ? 'dark' : 'light'}`}
+        className={`navbar ${darkMode ? 'dark' : 'light'} ${scrolled ? 'scrolled' : ''}`}
         variants={navMotion}
         initial="hidden"
         animate="visible"
       >
         <div className="nav-container">
-          <motion.div
-            className="nav-logo"
+          {/* Logo */}
+          <div 
+            className="nav-logo" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
           >
-            CK
-          </motion.div>
+            <span className="logo-prompt">~/</span>
+            <span className="logo-text">CK</span>
+          </div>
 
-          <motion.ul
-            className="nav-menu"
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.25 } } }}
-          >
-            {navLinks.map((link) => (
-              <motion.li key={link} variants={linkMotion}>
-                <button
-                  className={`nav-link ${activeSection === link.toLowerCase() ? 'active' : ''}`}
-                  onClick={() => scrollToSection(link)}
-                >
-                  {link}
-                </button>
-              </motion.li>
-            ))}
-          </motion.ul>
+          {/* Desktop Navigation */}
+          <div className="nav-menu-wrapper">
+            <ul className="nav-menu">
+              {navLinks.map((link, idx) => {
+                const isActive = activeSection === link.toLowerCase();
+                return (
+                  <li key={link} className="nav-item">
+                    <button
+                      className={`nav-link ${isActive ? 'active' : ''}`}
+                      onClick={() => scrollToSection(link)}
+                    >
+                      <span className="nav-num">0{idx + 1}</span>
+                      <span className="nav-text">{link}</span>
 
+                      {/* Continuous Smooth Express Indicator */}
+                      <motion.div
+                        className="express-pill"
+                        initial={false}
+                        animate={{
+                          opacity: isActive ? 1 : 0,
+                          scale: isActive ? 1 : 0.94,
+                        }}
+                        transition={{ duration: 0.24, ease: 'easeOut' }}
+                      />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Controls */}
           <div className="nav-right">
-            <motion.button
+            <button
               onClick={toggleDarkMode}
-              className="theme-toggle"
+              className="icon-btn theme-toggle"
               aria-label="Toggle theme"
-              whileHover={{ scale: 1.05, rotate: 10 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.35 }}
             >
-              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-            </motion.button>
+              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
 
-            <motion.button
-              className="menu-toggle"
-              onClick={toggleMenu}
-              aria-label="Open mobile menu"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.35 }}
+            <button
+              className="icon-btn menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </motion.button>
+            </button>
 
+            {/* Mobile Menu */}
             <AnimatePresence>
               {menuOpen && (
                 <motion.div
                   className="dropdown-menu"
-                  initial={{ opacity: 0, scale: 0.35 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.35 }}
-                  transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <div className="dropdown-links">
-                    {navLinks.map((link, index) => (
-                      <motion.button
-                        key={link}
-                        className={`dropdown-nav-link ${activeSection === link.toLowerCase() ? 'active' : ''}`}
-                        onClick={() => scrollToSection(link)}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.15, delay: 0.04 * index + 0.1 }}
-                      >
-                        {link}
-                      </motion.button>
-                    ))}
-                  </div>
+                  {navLinks.map((link, index) => (
+                    <button
+                      key={link}
+                      className={`dropdown-nav-link ${activeSection === link.toLowerCase() ? 'active' : ''}`}
+                      onClick={() => scrollToSection(link)}
+                    >
+                      <span className="dropdown-num">0{index + 1}.</span>
+                      <span>{link}</span>
+                    </button>
+                  ))}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -167,6 +166,7 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
         </div>
       </motion.nav>
 
+      {/* Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -174,8 +174,7 @@ const Navigation = ({ darkMode, toggleDarkMode }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={toggleMenu}
+            onClick={() => setMenuOpen(false)}
           />
         )}
       </AnimatePresence>

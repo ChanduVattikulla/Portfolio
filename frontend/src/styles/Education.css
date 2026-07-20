@@ -1,6 +1,12 @@
 /* ============================================================
-   PREMIUM STUDIO TIMELINE ARCHITECTURE (EDUCATION)
+   MATHEMATICAL TIMELINE ARCHITECTURE WITH ALIGNMENT
    ============================================================ */
+
+:root {
+  --timeline-position: 1rem;        /* Fixed reference point */
+  --dot-size: 11px;
+  --line-width: 1.5px;
+}
 
 .education-section {
   padding: clamp(3rem, 6vh, 6rem) 1.5rem;
@@ -109,24 +115,24 @@
 }
 
 /* ============================================================
-   TIMELINE STEM VERTEBRAE
+   TIMELINE BACKBONE - MATHEMATICAL ALIGNMENT
    ============================================================ */
 .edu-timeline-backbone {
-  --line-gap: 2.5rem;
   position: relative;
-  padding-left: var(--line-gap);
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  margin-left: var(--timeline-position);
 }
 
+/* Timeline line - positioned at exact reference point */
 .edu-timeline-backbone::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: calc(var(--timeline-position) * -1);
   top: 0.5rem;
   bottom: 0.5rem;
-  width: 1.5px;
+  width: var(--line-width);
   background: linear-gradient(180deg, #6366f1 0%, #a78bfa 50%, rgba(244, 114, 182, 0.2) 100%);
   opacity: 0.6;
 }
@@ -140,21 +146,29 @@
   width: 100%;
 }
 
-/* PRECISION NODE DOT CAP */
+/* PRECISION NODE DOT - MATHEMATICALLY ALIGNED */
 .edu-node-dot {
-  --dot-size: 11px;
   position: absolute;
-  left: calc(-1 * var(--line-gap));
-  top: 1.75rem;
   width: var(--dot-size);
   height: var(--dot-size);
-  transform: translateX(-40%);
+  
+  /* Mathematical alignment: 
+     - Dot center = line center
+     - Line is at: left: calc(var(--timeline-position) * -1)
+     - Dot needs to be at same position
+     - Using transform to center the dot on the line
+  */
+  left: calc(var(--timeline-position) * -1);
+  transform: translateX(calc((var(--line-width) - var(--dot-size)) / 2));
+  
+  top: 1.75rem;
   border-radius: 50%;
   border: 2px solid #6366f1;
   background: #ffffff;
   z-index: 5;
   box-shadow: 0 0 10px rgba(99, 102, 241, 0.35);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  data-timeline-aligned: 'true';
 }
 
 .education-section.dark .edu-node-dot {
@@ -180,7 +194,6 @@
 
 .edu-timeline-node:hover .edu-node-dot {
   background: #6366f1;
-  transform: translateX(-40%) scale(1.2);
   box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2), 0 0 16px #6366f1;
 }
 
@@ -392,15 +405,23 @@
 }
 
 /* ============================================================
-   RESPONSIVE SCALING ADAPTATIONS
+   RESPONSIVE - MOBILE ADJUSTMENTS
    ============================================================ */
+
 @media (max-width: 768px) {
+  :root {
+    --timeline-position: 0.9rem;
+  }
+
   .education-section {
-    padding: 3rem 0;
+    padding: 2rem 1rem;
+  }
+
+  .edu-bounded-container {
+    gap: 2rem;
   }
 
   .edu-timeline-backbone {
-    --line-gap: 1.75rem;
     gap: 1.5rem;
   }
 
@@ -410,6 +431,10 @@
 
   .edu-card-interior {
     padding: 1.25rem;
+  }
+
+  .edu-degree-title {
+    font-size: 1.05rem;
   }
 
   .edu-card-header {
@@ -424,11 +449,77 @@
 }
 
 @media (max-width: 480px) {
+  :root {
+    --timeline-position: 0.75rem;
+  }
+
+  .education-section {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .edu-bounded-container {
+    gap: 1.5rem;
+  }
+
   .edu-timeline-backbone {
-    --line-gap: 1.25rem;
+    gap: 1.2rem;
+  }
+
+  .edu-node-dot {
+    top: 1.4rem;
+  }
+
+  .edu-main-title {
+    font-size: 1.5rem;
+  }
+
+  .edu-subtitle {
+    font-size: 0.85rem;
   }
 
   .edu-degree-title {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+  }
+
+  .edu-card-interior {
+    padding: 1rem;
+  }
+
+  .edu-institution-label {
+    font-size: 0.8rem;
+  }
+
+  .edu-description-text {
+    font-size: 0.8rem;
+  }
+
+  .edu-metric-pill {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --timeline-position: 0.65rem;
+  }
+
+  .education-section {
+    padding: 1rem 0.5rem;
+  }
+
+  .edu-node-dot {
+    --dot-size: 9px;
+  }
+
+  .edu-main-title {
+    font-size: 1.3rem;
+  }
+
+  .edu-degree-title {
+    font-size: 0.9rem;
+  }
+
+  .edu-card-interior {
+    padding: 0.8rem;
   }
 }

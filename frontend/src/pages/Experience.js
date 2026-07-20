@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Experience.css';
 import 'devicon/devicon.min.css';
 
 const Experience = ({ darkMode }) => {
+  const [copiedId, setCopiedId] = useState(null);
+
+  const handleCopy = (link, id) => {
+    navigator.clipboard.writeText(link);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
   const experiences = [
     {
       id: 3,
@@ -12,68 +20,58 @@ const Experience = ({ darkMode }) => {
       duration: 'May – June 2026 (2 months)',
       mode: 'Remote',
       type: 'Internship',
-      issueDate: "June 4, 2026",
+      issueDate: 'June 4, 2026',
       verifyLink: 'https://www.thiranex.in/?verifyId=THX-MAY226-3796',
-      description: 'Built full‑stack web applications using Python, Django, HTML, CSS, JavaScript, and MySQL. Developed responsive user interfaces and integrated backend functionality while working on real‑world projects. Strengthened practical skills in backend development, database management, debugging, testing, and deployment.',
       techStack: ['Python', 'Django', 'HTML5', 'CSS3', 'JavaScript', 'MySQL'],
       achievements: [
-        'Built full‑stack web applications using Django and MySQL',
-        'Developed responsive user interfaces and integrated backend functionality',
-        'Strengthened skills in backend development, database management, debugging, and testing'
+        'Architected full-stack web applications using Django and MySQL.',
+        'Engineered responsive user interfaces and integrated backend APIs for real-world projects.',
+        'Strengthened production skills across database management, debugging, testing, and deployment.'
       ],
-      outcome: 'Completed real‑world full‑stack projects with a production‑ready codebase',
-      icon: 'devicon-python-plain colored',
-      color: 'transparent'
+      outcome: 'Delivered production-ready full-stack applications with clean, modular codebases.',
+      icon: 'devicon-python-plain colored'
     },
     {
       id: 2,
-      role: 'AI-Powered Cloud Engineer Virtual Internship',
+      role: 'AI-Powered Cloud Engineer Virtual Intern',
       company: 'EduSkills Foundation®',
       duration: 'April – June 2026 (3 months)',
       mode: 'Remote',
       type: 'Internship',
       issueDate: 'July 10, 2026',
       verifyLink: 'https://certificate.eduskillsfoundation.org/verify/4662941f3c46960112cc/4662941f3c46960112cc',
-      description: 'Gained hands-on experience through AWS labs covering cloud computing, networking, compute, storage, security, serverless, and Generative AI. Earned multiple AWS Educate skill badges by completing practical learning modules and assessments.',
       techStack: ['AWS EC2', 'S3', 'Lambda', 'API Gateway', 'IAM', 'Generative AI', 'CloudFormation'],
       achievements: [
-        'Provisioned and managed EC2 instances with auto‑scaling',
-        'Deployed serverless functions using AWS Lambda and API Gateway',
-        'Designed S3 bucket policies and IAM roles for secure access',
-        'Completed AWS Educate labs on AI/ML and serverless computing'
+        'Provisioned and managed EC2 compute instances configured with auto-scaling.',
+        'Deployed serverless microservices using AWS Lambda and API Gateway.',
+        'Authored granular S3 bucket policies and IAM roles for least-privilege security access.'
       ],
-      outcome: 'Earned 10 AWS Educate skill badges; built a serverless application prototype',
-      icon: 'devicon-amazonwebservices-plain-wordmark colored',
-      color: 'transparent'
+      outcome: 'Earned 10 AWS Educate skill badges & constructed a serverless application prototype.',
+      icon: 'devicon-amazonwebservices-plain-wordmark colored'
     },
     {
       id: 1,
-      role: 'Python Fullstack Developer (Intern)',
+      role: 'Python Fullstack Developer Intern',
       company: 'EduSkills',
       duration: 'Jan – March 2026 (10 weeks)',
       mode: 'Remote',
       type: 'Internship',
       issueDate: 'March 18, 2026',
       verifyLink: 'https://certificate.eduskillsfoundation.org/verify/462bb21459ddeb5f008d/462bb21459ddeb5f008d',
-      description: 'Built full‑stack web applications using Django and React, focusing on database integration and REST APIs.',
       techStack: ['Python', 'Django', 'SQL', 'React', 'JWT'],
       achievements: [
-        'Designed database schemas for 3+ modules',
-        'Implemented JWT authentication',
-        'Deployed applications on Render'
+        'Designed and normalized database schemas for 3+ core web modules.',
+        'Implemented JWT authentication middleware across secure endpoint routes.',
+        'Configured CI/CD pipelines to automatically deploy build artifacts onto Render.'
       ],
-      outcome: 'Delivered 2 production‑ready features used by 50+ internal users',
-      icon: 'devicon-python-plain colored',
-      color: 'transparent'
+      outcome: 'Shipped 2 production features active across 50+ internal users.',
+      icon: 'devicon-python-plain colored'
     }
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
   };
 
   const itemVariants = {
@@ -98,7 +96,7 @@ const Experience = ({ darkMode }) => {
           className="section-subtitle"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
           viewport={{ once: true }}
         >
           Building real-world solutions, one project at a time
@@ -113,60 +111,80 @@ const Experience = ({ darkMode }) => {
         >
           {experiences.map((exp) => (
             <motion.div key={exp.id} className="experience-item" variants={itemVariants}>
-              {/* ✅ Dot – same as Education section */}
               <span className="timeline-dot"></span>
 
               <div className="experience-card">
                 <div className="experience-content">
-                  {/* Top row: role + actions */}
+                  {/* Card Header */}
                   <div className="card-top">
                     <div className="role-group">
-                      <div className="exp-icon" style={{ backgroundColor: exp.color }}>
-                        {typeof exp.icon === 'string' ? <i className={exp.icon}></i> : exp.icon}
+                      <div className="exp-icon">
+                        <i className={exp.icon}></i>
                       </div>
-                      <h3 className="exp-role">{exp.role}</h3>
+                      <div>
+                        <h3 className="exp-role">{exp.role}</h3>
+                        <div className="card-subheader">
+                          <span className="company">{exp.company}</span>
+                          <span className="meta-badge">{exp.mode}</span>
+                          <span className="meta-badge">{exp.type}</span>
+                          <span className="duration">• {exp.duration}</span>
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Actions & Dates */}
                     <div className="action-group">
-                      {exp.issueDate && <span className="issue-date">{exp.issueDate}</span>}
+                      {exp.issueDate && <span className="issue-date">Issued {exp.issueDate}</span>}
                       {exp.verifyLink && (
                         <div className="action-buttons">
-                          <a href={exp.verifyLink} target="_blank" rel="noopener noreferrer" className="action-btn">
-                            Verify
+                          <a href={exp.verifyLink} target="_blank" rel="noopener noreferrer" className="action-btn verify-btn">
+                            Verify ↗
                           </a>
-                          <button className="action-btn" onClick={() => navigator.clipboard.writeText(exp.verifyLink)}>
-                            Copy
+                          <button
+                            className={`action-btn copy-btn ${copiedId === exp.id ? 'copied' : ''}`}
+                            onClick={() => handleCopy(exp.verifyLink, exp.id)}
+                            aria-label="Copy verification link"
+                          >
+                            {copiedId === exp.id ? (
+                              <>
+                                <svg className="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Copied!
+                              </>
+                            ) : (
+                              'Copy'
+                            )}
                           </button>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Subheader: company, mode, duration */}
-                  <div className="card-subheader">
-                    <span className="company">{exp.company}</span>
-                    <span className="meta-badge">{exp.mode}</span>
-                    <span className="meta-badge">{exp.type}</span>
-                    <span className="duration">{exp.duration}</span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="exp-description">{exp.description}</p>
-
-                  {/* Tech stack */}
-                  <div className="tech-stack">
-                    <span className="tech-label">TECH STACK</span>
-                    <span className="tech-items">{exp.techStack.join(' · ')}</span>
-                  </div>
-
-                  {/* Achievements */}
+                  {/* Key Contributions */}
                   <ul className="achievements-list">
                     {exp.achievements.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
 
-                  {/* Outcome */}
-                  {exp.outcome && <div className="outcome">{exp.outcome}</div>}
+                  {/* Interactive Tech Stack */}
+                  <div className="tech-stack">
+                    <span className="tech-label">STACK</span>
+                    <div className="tech-chips">
+                      {exp.techStack.map((tech, idx) => (
+                        <span key={idx} className="chip">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* High Impact Outcome Banner */}
+                  {exp.outcome && (
+                    <div className="outcome">
+                      <span className="outcome-icon">💡</span>
+                      <span><strong>Key Impact:</strong> {exp.outcome}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
