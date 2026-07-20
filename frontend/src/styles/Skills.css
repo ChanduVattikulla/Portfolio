@@ -1,104 +1,209 @@
-/* Skills Section - Premium Integration */
+/* ==========================================================================
+   1. Dynamic Theme Variables & Modern Palettes
+   ========================================================================== */
+.light {
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-glow: rgba(99, 102, 241, 0.12);
+  --accent-primary: #6366f1;
+  --pill-bg: #f1f5f9;
+  --pill-border: rgba(0, 0, 0, 0.06);
+}
+
+.dark {
+  --bg-card: rgba(17, 24, 39, 0.7);
+  --bg-card-hover: rgba(31, 41, 55, 0.8);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-glow: rgba(168, 85, 247, 0.15);
+  --accent-primary: #a855f7;
+  --pill-bg: rgba(255, 255, 255, 0.05);
+  --pill-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   2. Structural Layout
+   ========================================================================== */
 .skills {
   padding: clamp(3rem, 6vh, 6rem) 0;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Skills Subtitle */
-.skills-subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  max-width: 550px;
-  margin: 0.5rem auto 2.5rem auto;
-}
-
-/* Skills Container - Clean grid */
-.skills-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
-/* Skill Item - Clean, minimal, with hover lift */
-.skill-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 60px;
-  background: var(--bg-card);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border-dark);
-}
-
-.skill-item:hover {
-  transform: translateY(-4px) scale(1.04);
-  border-color: var(--card-border-hover);
-  box-shadow: var(--shadow-sm);
-  background: var(--bg-card-hover);
-}
-
-/* Skill Icon */
-.skill-icon {
-  font-size: 22px;
+.subtitle-badge {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--accent-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Filter Nav Bar */
+.skills-filter-nav {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 840px;
+  margin: 0 auto 2.5rem auto;
 }
 
-/* Skill Name */
-.skill-name {
-  display: block;
-  color: inherit;
+.filter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: color 0.25s ease;
+  z-index: 1;
 }
 
-/* Emoji icon fallback */
+.filter-btn:hover {
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  color: #ffffff;
+}
+
+.light .filter-btn.active {
+  color: #ffffff;
+}
+
+.active-indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-primary);
+  border-radius: 10px;
+  z-index: -1;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+/* ==========================================================================
+   3. 2026 Bento Grid Layout
+   ========================================================================== */
+.skills-bento-grid {
+  max-width: 840px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 30px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.category-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--pill-bg);
+  color: var(--accent-primary);
+}
+
+.category-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* High-Density Interactive Skill Tags */
+.skills-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.pill-icon {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pill-text {
+  letter-spacing: -0.01em;
+}
+
 .emoji-icon {
-  font-size: 20px;
-  line-height: 1;
+  font-size: 14px;
 }
 
-/* Responsive */
+/* ==========================================================================
+   4. Responsive Design
+   ========================================================================== */
 @media (max-width: 768px) {
-  .skills-container {
-    gap: 0.7rem;
+  .skills-bento-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .skill-item {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    gap: 8px;
-  }
-  
-  .skill-icon {
-    font-size: 18px;
-  }
-}
 
-@media (max-width: 480px) {
-  .skills-container {
-    gap: 0.5rem;
+  .skills-filter-nav {
+    gap: 4px;
+    margin-bottom: 1.5rem;
   }
-  
-  .skill-item {
+
+  .filter-btn {
     padding: 6px 12px;
-    font-size: 0.8rem;
-    gap: 6px;
-    border-radius: 40px;
-  }
-  
-  .skill-icon {
-    font-size: 16px;
+    font-size: 0.775rem;
   }
 }

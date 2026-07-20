@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import '../styles/About.css';
 
 const About = ({ darkMode }) => {
@@ -20,7 +21,6 @@ const About = ({ darkMode }) => {
     };
   }, [isExpanded]);
 
-  // ✅ Structured content – clean paragraphs
   const shortIntro = `I'm a B.Tech Computer Science student passionate about building modern web applications and exploring artificial intelligence. With hands-on experience in full-stack development, I've worked on diverse projects from real-time web apps to AI solutions.`;
 
   const additionalParagraphs = [
@@ -28,66 +28,61 @@ const About = ({ darkMode }) => {
     `Beyond coding, I'm an active member of the developer community. I contribute to open-source projects, solve complex problems on LeetCode, and love sharing my knowledge through GitHub. I believe in writing clean, maintainable code and creating user experiences that genuinely matter. When I'm not coding, you'll find me exploring new technologies, reading about machine learning breakthroughs, or mentoring junior developers.`
   ];
 
-  // ✅ Container variants for staggering
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15
+        staggerChildren: 0.12
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 1, 0.5, 1] } }
   };
 
   return (
     <section id="about" className={`about ${darkMode ? 'dark' : 'light'}`}>
       <div className="section-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: -20 }}
+        <motion.div 
+          className="section-header"
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          About Me
-        </motion.h2>
+          <span className="section-subtitle">Introduction</span>
+          <h2 className="section-title">About Me</h2>
+        </motion.div>
 
         <motion.div 
           className="about-wrapper"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
         >
           <div 
-            className={`about-container ${darkMode ? 'dark' : 'light'}`}
+            className="about-container"
             ref={containerRef}
           >
-            <motion.div className="about-content">
-              {/* ✅ Short intro – always visible */}
-              <motion.p 
-                className="about-intro"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+            <div className="about-content">
+              {/* Short intro – always visible */}
+              <p className="about-intro">
                 {shortIntro}
-              </motion.p>
+              </p>
               
-              {/* ✅ Expanded paragraphs with stagger animation */}
-              <AnimatePresence>
+              {/* Expanded paragraphs with stagger animation */}
+              <AnimatePresence initial={false}>
                 {isExpanded && (
                   <motion.div
                     className="expanded-content"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                   >
                     <motion.div
                       className="expanded-paragraphs"
@@ -108,17 +103,17 @@ const About = ({ darkMode }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
 
             {/* Read More / Read Less button */}
-            <motion.button
+            <button
               className="read-more-btn"
               onClick={() => setIsExpanded(!isExpanded)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              aria-expanded={isExpanded}
             >
-              {isExpanded ? 'Read Less' : 'Read More'}
-            </motion.button>
+              <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+              <ChevronDown className={`btn-icon ${isExpanded ? 'rotated' : ''}`} size={16} />
+            </button>
           </div>
         </motion.div>
       </div>

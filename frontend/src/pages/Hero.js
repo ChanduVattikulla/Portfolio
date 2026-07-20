@@ -1,115 +1,158 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import '../styles/Hero.css';
 
-const roles = [
-  'Full-Stack Developer & AI Enthusiast',
-  'React & Python Specialist',
-  'Cloud & AI Engineer',
-  'Open Source Contributor'
-];
-
 const Hero = ({ darkMode }) => {
+  // Grounded, professional roles
+  const roles = [
+    "Full-Stack Web Developer",
+    "Software Engineering Student",
+    "AI & Automation Developer",
+    "Frontend & React Developer"
+  ];
+
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
 
   useEffect(() => {
-    const currentRole = roles[currentIndex];
-    let timeout;
+    const currentFullText = roles[currentRoleIndex];
 
-    if (isPaused) {
-      timeout = setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(true);
-      }, 1500);
-      return () => clearTimeout(timeout);
-    }
+    const handleTyping = () => {
+      if (!isDeleting) {
+        setDisplayText(currentFullText.substring(0, displayText.length + 1));
+        setTypingSpeed(90);
 
-    if (isDeleting) {
-      setDisplayText('');
-      setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % roles.length);
-      return;
-    } else {
-      if (displayText.length < currentRole.length) {
-        timeout = setTimeout(() => {
-          setDisplayText(currentRole.slice(0, displayText.length + 1));
-        }, 80);
+        if (displayText === currentFullText) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
       } else {
-        setIsPaused(true);
-      }
-    }
+        setDisplayText(currentFullText.substring(0, displayText.length - 1));
+        setTypingSpeed(45);
 
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentIndex, isPaused]); // ✅ FIX: removed `roles`
+        if (displayText === '') {
+          setIsDeleting(false);
+          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentRoleIndex, typingSpeed, roles]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+      transition: { staggerChildren: 0.12, delayChildren: 0.7 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+    hidden: { opacity: 0, y: 14, filter: 'blur(4px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] }
+    }
   };
 
   return (
     <section id="hero" className={`hero ${darkMode ? 'dark' : 'light'}`}>
-      <motion.div 
+      <motion.div
         className="hero-container"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="hero-content" variants={itemVariants}>
-          <motion.h1 className="hero-title" variants={itemVariants}>
-            Hi, I'm <span className="highlight">Chandu Vattikulla</span>
-          </motion.h1>
-          
-          <motion.h2 className="hero-subtitle" variants={itemVariants}>
-            <span className="typing-text">{displayText}</span>
-            <span className="typing-cursor"></span>
-          </motion.h2>
-          
-          <motion.p className="hero-tagline" variants={itemVariants}>
-            I build modern web applications with React, craft intelligent solutions with AI, and share my journey on GitHub. Let's create something amazing together.
-          </motion.p>
+        {/* Terminal window wraps the content column */}
+        <div className="hero-terminal">
+          <div className="terminal-titlebar">
+            <span className="terminal-dots">
+              <span className="terminal-dot red"></span>
+              <span className="terminal-dot amber"></span>
+              <span className="terminal-dot green"></span>
+            </span>
+            <span className="terminal-filename">chandu@portfolio: ~/hero</span>
+          </div>
 
-          <motion.div className="hero-buttons" variants={itemVariants}>
-            <motion.button 
-              className="btn btn-primary"
-              whileHover={{ scale: 1.08, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-            >
-              Explore My Work
-            </motion.button>
-            <motion.button 
-              className="btn btn-secondary"
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('/Chandu_Vattikulla_Resume.pdf', '_blank')}
-            >
-              Get My Resume
-            </motion.button>
+          <motion.div className="terminal-body" variants={containerVariants} initial="hidden" animate="visible">
+
+            {/* Prompt-style status badge */}
+            <motion.div className="hero-status-tag" variants={itemVariants}>
+              <span className="prompt-symbol">&gt;</span>
+              <span className="pulse-container">
+                <span className="pulse-dot"></span>
+                <span className="pulse-ring"></span>
+              </span>
+              <span className="status-text">Open to Engineering Opportunities</span>
+            </motion.div>
+
+            {/* Main Name Header */}
+            <motion.h1 className="hero-title" variants={itemVariants}>
+              <span className="caret">&gt;</span>
+              <span>Hi, I'm <span className="highlight">Chandu Vattikulla</span></span>
+            </motion.h1>
+
+            {/* Subtitle with typing effect */}
+            <motion.h2 className="hero-subtitle" variants={itemVariants}>
+              <span className="prompt-dollar">$</span>
+              <span className="typing-text">{displayText}</span>
+              <span className="cursor"></span>
+            </motion.h2>
+
+            {/* Summary, styled as a code comment */}
+            <motion.p className="hero-tagline" variants={itemVariants}>
+              <span className="comment-mark">//</span>
+              Building web software, working with modern tools and AI APIs, and focusing on clean, reliable user experiences.
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div className="hero-buttons" variants={itemVariants}>
+              <motion.button
+                className="btn btn-primary"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span>View Projects</span>
+                <ArrowUpRight className="btn-icon" size={18} />
+              </motion.button>
+
+              <motion.button
+                className="btn btn-secondary"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => window.open('/Chandu_Vattikulla_Resume.pdf', '_blank')}
+              >
+                <FileText className="btn-icon" size={17} />
+                <span>Resume</span>
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
+        {/* Profile Image Column */}
         <motion.div className="hero-image-wrapper" variants={itemVariants}>
-          <motion.div 
-            className={`profile-circle floating ${darkMode ? 'dark' : 'light'}`}
-            initial={{ y: 0, scale: 0.98 }}
-            animate={{ y: [0, -16, 0], scale: [0.98, 1.02, 0.98] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <div className="pulse-ring" aria-hidden="true"></div>
-            <img src="/images/profile.jpeg" alt="Profile" className="profile-img" />
-          </motion.div>
+          <div className="profile-frame">
+            <span className="frame-corner tl"></span>
+            <span className="frame-corner tr"></span>
+            <span className="frame-corner bl"></span>
+            <span className="frame-corner br"></span>
+            <motion.div
+              className={`profile-circle ${darkMode ? 'dark' : 'light'}`}
+              initial={{ y: 0, scale: 0.98 }}
+              animate={{ y: [0, -10, 0], scale: [0.98, 1.01, 0.98] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <span className="profile-scanline"></span>
+              <img src="/images/profile.jpeg" alt="Chandu Vattikulla" className="profile-img" />
+            </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </section>

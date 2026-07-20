@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import 'devicon/devicon.min.css';
 import '../styles/Footer.css';
@@ -6,23 +6,16 @@ import '../styles/Footer.css';
 const Footer = ({ darkMode }) => {
   const year = new Date().getFullYear();
   const [copied, setCopied] = useState(false);
-  const [time, setTime] = useState('');
-
-  // Live localized clock widget tracking India Standard Time (IST)
-  useEffect(() => {
-    const updateTime = () => {
-      const options = { timeStyle: 'short', hour12: true, timeZone: 'Asia/Kolkata' };
-      setTime(new Intl.DateTimeFormat('en-US', options).format(new Date()));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('chanduvattikulla71@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText('chanduvattikulla71@gmail.com')
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {
+        alert('Copy manually: chanduvattikulla71@gmail.com');
+      });
   };
 
   const scrollToTop = () => {
@@ -67,25 +60,14 @@ const Footer = ({ darkMode }) => {
             <p className="footer-premium-tagline">Aspiring Software Engineer · Competitive Programmer</p>
           </div>
 
-          {/* Status Grid Block */}
+          {/* Status Grid — only the open‑to‑work token (no pulse) */}
           <div className="footer-status-grid">
             <div className="status-token open-to-work">
-              <span className="pulse-indicator"></span>
               <svg viewBox="0 0 24 24" className="token-icon" aria-hidden="true">
                 <path fillRule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6L12 1.5 7.5 6ZM15 6.75V3.375L12.375 6H15Zm-6 0H9.625L12 3.375V6.75H9Z" clipRule="evenodd" />
               </svg>
-              <span className="token-label">Open to Internships</span>
+              <span className="token-label">Open to Internship Opportunities</span>
             </div>
-
-            {time && (
-              <div className="status-token local-time">
-                <svg viewBox="0 0 24 24" className="token-icon" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
-                <span className="token-label">{time} IST</span>
-              </div>
-            )}
           </div>
           
           <div className="legal-metadata">

@@ -1,50 +1,66 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { Code2, GitFork, Award, Briefcase, ExternalLink, ArrowUpRight } from 'lucide-react';
 import '../styles/Stats.css';
 
 const Stats = ({ darkMode }) => {
   const [stats, setStats] = useState([
-    { 
+    {
+      id: 'leetcode',
       label: 'LeetCode Problems',
       target: 50,
       current: 0,
-      link: 'https://leetcode.com/u/ChanduVattikulla/'
+      icon: Code2,
+      badge: 'Problem Solving',
+      link: 'https://leetcode.com/u/ChanduVattikulla/',
+      actionText: 'View Profile'
     },
-    { 
+    {
+      id: 'github',
       label: 'GitHub Repositories',
       target: 8,
       current: 0,
-      link: 'https://github.com/ChanduVattikulla'
+      icon: GitFork,
+      badge: 'Open Source',
+      link: 'https://github.com/ChanduVattikulla',
+      actionText: 'Browse Code'
     },
-    { 
+    {
+      id: 'skills',
       label: 'Skills Certified',
       target: 12,
       current: 0,
-      link: '#certifications'
+      icon: Award,
+      badge: 'Verified Tech',
+      link: '#skills',
+      actionText: 'View Credentials'
     },
-    { 
-      label: 'Internships',
+    {
+      id: 'internships',
+      label: 'Internships & Projects',
       target: 3,
       current: 0,
-      link: '#experience'
+      icon: Briefcase,
+      badge: 'Industry Practice',
+      link: '#experience',
+      actionText: 'Explore Roles'
     },
   ]);
 
-  // 👇 attach a ref to the section
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
+  const isInView = useInView(sectionRef, { once: true, margin: '-50px' });
 
   useEffect(() => {
     if (!isInView) return;
 
     const interval = setInterval(() => {
-      setStats(prevStats => 
+      setStats(prevStats =>
         prevStats.map(stat => ({
           ...stat,
-          current: Math.min(stat.current + Math.ceil(stat.target / 25), stat.target)
+          current: Math.min(stat.current + Math.ceil(stat.target / 30), stat.target)
         }))
       );
-    }, 100);
+    }, 35);
 
     return () => clearInterval(interval);
   }, [isInView]);
@@ -53,60 +69,87 @@ const Stats = ({ darkMode }) => {
     <section 
       ref={sectionRef}
       id="stats" 
-      className={`stats ${darkMode ? 'dark' : 'light'}`}
+      className={`stats-section ${darkMode ? 'dark' : 'light'}`}
     >
-      <div className="section-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+      <div className="stats-container">
+        {/* Section Header */}
+        <motion.div 
+          className="stats-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          The Numbers That Define My Journey
-        </motion.h2>
+          <div className="stats-pill">
+            <span className="pulse-indicator"></span>
+            <span>Real-Time Highlights</span>
+          </div>
+          <h2 className="stats-title">Impact & Proof Work</h2>
+        </motion.div>
 
-        <motion.p 
-          className="stats-subtitle"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          Every number represents a challenge conquered
-        </motion.p>
-
+        {/* Modern 2026 Cards Grid */}
         <div className="stats-grid">
-          {stats.map((stat, index) => (
-            <motion.a
-  key={index}
-  href={stat.link}
-  className="stat-card-link"
-  {...(stat.link.startsWith('#') 
-      ? {} 
-      : { target: "_blank", rel: "noopener noreferrer" })}
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1.2, delay: index * 0.2 }}
-  viewport={{ once: true }}
->
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            const progressPercent = Math.round((stat.current / stat.target) * 100);
 
-              <motion.div 
-                className="stat-card"
-                whileHover={{ scale: 1.08, y: -5 }}
+            return (
+              <motion.a
+                key={stat.id}
+                href={stat.link}
+                className="stat-card-wrapper"
+                {...(stat.link.startsWith('#') 
+                  ? {} 
+                  : { target: "_blank", rel: "noopener noreferrer" })}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
               >
-                <motion.div 
-  className="stat-value"
-  animate={stat.current === stat.target ? { scale: [1, 1.2, 1] } : {}}
-  transition={{ duration: 0.8 }}
->
-  {new Intl.NumberFormat('en-US', { minimumIntegerDigits: 2 }).format(stat.current)}+
-</motion.div>
+                <div className={`stat-card ${stat.current === stat.target ? 'is-complete' : ''}`}>
+                  {/* Top Ambient Glow */}
+                  <div className="glow-aura" />
 
-                <div className="stat-label">{stat.label}</div>
-              </motion.div>
-            </motion.a>
-          ))}
+                  {/* Header Row: Icon + Badge */}
+                  <div className="card-top-row">
+                    <div className="icon-box">
+                      <IconComponent size={20} />
+                    </div>
+                    <span className="category-badge">{stat.badge}</span>
+                  </div>
+
+                  {/* Stat Value & Counter */}
+                  <div className="stat-value-container">
+                    <span className="stat-number">
+                      {new Intl.NumberFormat('en-US', { minimumIntegerDigits: 2 }).format(stat.current)}
+                    </span>
+                    <span className="stat-plus">+</span>
+                  </div>
+
+                  {/* Label */}
+                  <div className="stat-label">{stat.label}</div>
+
+                  {/* Dynamic Progress Fill Bar */}
+                  <div className="progress-bar-track">
+                    <div 
+                      className="progress-bar-fill"
+                      style={{ width: `${progressPercent}%` }}
+                    />
+                  </div>
+
+                  {/* Card Footer Link Hint */}
+                  <div className="card-footer-action">
+                    <span>{stat.actionText}</span>
+                    {stat.link.startsWith('#') ? (
+                      <ArrowUpRight size={14} className="action-icon" />
+                    ) : (
+                      <ExternalLink size={14} className="action-icon" />
+                    )}
+                  </div>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
       </div>
     </section>
