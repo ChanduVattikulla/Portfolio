@@ -1,210 +1,511 @@
-/* Resume Section - Premium Integration */
-.resume {
-  padding: clamp(3rem, 6vh, 6rem) 0;
+/* ============================================================
+   2026 NEXT-GEN RESUME & DOSSIER ENGINE
+   ============================================================ */
+
+.v2026-resume-section {
+  padding: clamp(5rem, 10vh, 10rem) 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Download Section */
-.resume-download {
+.resume-section-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* HEADLINE ARCHITECTURE */
+.resume-headline-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   text-align: center;
-  margin-bottom: 3rem;
 }
 
-/* 
-   ===== BUTTON OVERRIDES - Kill global underline ===== 
-*/
-.download-btn {
-  text-decoration: none !important;
+.resume-subtitle {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6366f1;
 }
 
-.download-btn::after {
-  display: none !important;
-  content: none !important;
+.resume-main-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin: 0;
+  line-height: 1.1;
 }
 
-/* Download Button - Uses global gradient */
-.download-btn {
+.v2026-resume-section.dark .resume-main-title {
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.v2026-resume-section.light .resume-main-title {
+  background: linear-gradient(135deg, #0f172a 40%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ACTION DOCK & GLASS HULL */
+.v2026-action-dock {
+  width: 100%;
+}
+
+.dock-glass-hull {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  gap: 1.5rem;
+}
+
+.v2026-resume-section.light .dock-glass-hull {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.dock-left-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.live-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 16px 40px;
-  background: var(--gradient-main);
-  color: white;
-  border: none;
-  border-radius: 60px;
-  font-size: 1rem;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  white-space: nowrap;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulsePulse 2s infinite;
+}
+
+@keyframes pulsePulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.meta-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-title {
+  font-size: 0.95rem;
   font-weight: 700;
+}
+.v2026-resume-section.dark .file-title { color: #f8fafc; }
+.v2026-resume-section.light .file-title { color: #0f172a; }
+
+.file-status {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.dock-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-svg-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.secondary-preview-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.v2026-resume-section.light .secondary-preview-btn {
+  background: rgba(0, 0, 0, 0.04);
+  color: #334155;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.secondary-preview-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.primary-download-btn {
+  background: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
+}
+
+.primary-download-btn:hover {
+  background: #4f46e5;
+  box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* PERSPECTIVE NAVIGATION TABS */
+.view-selector-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tab-pill-btn {
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #64748b;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
 }
 
-.download-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 35px rgba(99, 102, 241, 0.4);
+.tab-pill-btn.active {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
-.download-hint {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 0.75rem;
-  letter-spacing: 0.02em;
+.tab-pill-btn:hover:not(.active) {
+  color: #94a3b8;
 }
 
-/* Highlights Container */
-.highlights-container {
-  max-width: 1200px;
-  margin: 0 auto;
+/* BENTO MATRIX GRID */
+.bento-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
-.highlights-container h3 {
-  font-size: 1.5rem;
+.bento-tile-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v2026-resume-section.light .bento-tile-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.bento-tile-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.bento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bento-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.bento-tag-badge {
+  font-size: 0.75rem;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  color: var(--text-primary);
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bento-card-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0;
   letter-spacing: -0.02em;
 }
 
-/* 
-   ===== FUTURE-PROOF SMART GRID ===== 
-   - Caps at 3 columns (max-width: 960px)
-   - Uses auto-fit so the last row stretches to fill gaps
-   - Looks balanced with 4, 5, 6, 7, 8, or 9 cards!
-*/
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 960px; /* Caps it so only 3 columns fit */
-  margin: 0 auto;
+.v2026-resume-section.dark .bento-card-heading { color: #f8fafc; }
+.v2026-resume-section.light .bento-card-heading { color: #0f172a; }
+
+.bento-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
 }
 
-/* Highlight Card - Glassmorphism */
-.highlight-card {
-  padding: 2.5rem 2rem;
+/* STACK ARCHITECTURE MATRIX */
+.stack-architecture-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skill-group-container {
+  padding: 2rem;
   border-radius: 24px;
-  text-align: center;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-dark);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-/* Shimmer effect */
-.highlight-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
+.v2026-resume-section.light .skill-group-container {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.group-category-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+  color: #6366f1;
+}
+
+.skills-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-chip-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+}
+
+.skill-chip-pill:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.skill-devicon {
+  font-size: 1.25rem;
+}
+
+.skill-chip-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.v2026-resume-section.dark .skill-chip-name { color: #e2e8f0; }
+.v2026-resume-section.light .skill-chip-name { color: #1e293b; }
+
+/* MODAL PREVIEW OVERLAY */
+.resume-preview-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.resume-preview-modal {
+  width: 100%;
+  max-width: 900px;
+  height: 85vh;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.resume-preview-modal.light {
+  background: #ffffff;
+}
+
+.modal-top-bar {
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-top-bar h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.pdf-viewer-frame {
+  flex: 1;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-  transition: left 0.7s ease;
-  pointer-events: none;
 }
 
-.highlight-card:hover::before {
-  left: 100%;
+/* RESPONSIVE SCALING */
+@media (max-width: 900px) {
+  .bento-matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.highlight-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--card-border-hover);
-  box-shadow: var(--shadow-lg);
-  background: var(--bg-card-hover);
-}
-
-/* Highlight Icon */
-.highlight-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.highlight-card:hover .highlight-icon {
-  transform: scale(1.2) rotate(-5deg);
-}
-
-/* Highlight Title */
-.highlight-card h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-/* Highlight Description */
-.highlight-card p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-/* ===== RESPONSIVE ===== */
-
-/* Tablets & Small Laptops: 2 columns (auto-fit handles this) */
-@media (max-width: 1024px) {
-  .highlights-grid {
-    gap: 1.2rem;
-    max-width: 720px; /* Caps it so only 2 columns fit on tablets */
+@media (max-width: 768px) {
+  .dock-glass-hull {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
   }
   
-  .highlight-card {
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
+  .dock-left-meta {
+    flex-direction: column;
+    gap: 0.5rem;
   }
-}
 
-/* Mobile: 1 column */
-@media (max-width: 640px) {
-  .highlights-grid {
-    max-width: 100%;
-    gap: 1rem;
+  .dock-right-controls {
+    flex-direction: column;
   }
-  
-  .highlight-card {
-    padding: 1.5rem 1.2rem;
-    border-radius: 16px;
-  }
-  
-  .highlight-icon {
-    font-size: 2.5rem;
-  }
-  
-  .highlight-card h4 {
-    font-size: 1rem;
-  }
-  
-  .highlight-card p {
-    font-size: 0.85rem;
-  }
-  
-  .download-btn {
-    padding: 14px 28px;
-    font-size: 0.9rem;
+
+  .dock-btn {
     width: 100%;
     justify-content: center;
   }
+
+  .bento-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .view-selector-tabs {
+    flex-direction: column;
+  }
+}
+/* 1. Base SVG setup */
+.highlight-svg {
+  stroke: rgba(255, 255, 255, 0.6);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Mask gradient for the light sweep */
+  -webkit-mask-image: linear-gradient(
+    110deg,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.25) 50%,
+    #000 65%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    110deg,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.25) 50%,
+    #000 65%,
+    #000 100%
+  );
+  -webkit-mask-size: 250% 100%;
+  mask-size: 250% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
 }
 
-/* Extra small phones */
-@media (max-width: 480px) {
-  .highlights-grid {
-    gap: 0.8rem;
-  }
+/* 2. Hover Sweep Trigger */
+.bento-tile-card:hover .highlight-svg {
+  stroke: #818cf8; /* Highlights icon color */
+  transform: scale(1.1); /* Micro scale-up */
   
-  .highlight-card {
-    padding: 1.2rem 1rem;
-    border-radius: 14px;
-  }
-  
-  .highlight-icon {
-    font-size: 2rem;
-  }
+  /* Sweep light across the SVG */
+  -webkit-mask-position: 0% 0;
+  mask-position: 0% 0;
+  transition: -webkit-mask-position 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              mask-position 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              stroke 0.3s ease,
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
