@@ -3,22 +3,21 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import '../styles/Hero.css';
 
-const Hero = ({ darkMode }) => {
-  // Grounded, professional roles
-  const roles = [
-    "Full-Stack Web Developer",
-    "Software Engineering Student",
-    "AI & Automation Developer",
-    "Frontend & React Developer"
-  ];
+const ROLES = [
+  "Full-Stack Web Developer",
+  "Software Engineering Student",
+  "AI & Automation Developer",
+  "Frontend & React Developer"
+];
 
+const Hero = ({ darkMode }) => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(100);
 
   useEffect(() => {
-    const currentFullText = roles[currentRoleIndex];
+    const currentFullText = ROLES[currentRoleIndex];
 
     const handleTyping = () => {
       if (!isDeleting) {
@@ -34,14 +33,14 @@ const Hero = ({ darkMode }) => {
 
         if (displayText === '') {
           setIsDeleting(false);
-          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+          setCurrentRoleIndex((prev) => (prev + 1) % ROLES.length);
         }
       }
     };
 
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, currentRoleIndex, typingSpeed, roles]);
+  }, [displayText, isDeleting, currentRoleIndex, typingSpeed]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -107,7 +106,7 @@ const Hero = ({ darkMode }) => {
 
             {/* Summary, styled as a code comment */}
             <motion.p className="hero-tagline" variants={itemVariants}>
-              <span className="comment-mark">//</span>
+              <span className="comment-mark">{'//'}</span>
               Building web software, working with modern tools and AI APIs, and focusing on clean, reliable user experiences.
             </motion.p>
 
