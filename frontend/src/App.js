@@ -12,7 +12,7 @@ import Education from './pages/Education';
 import Certifications from './pages/Certifications';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
-
+import Footer from './components/Footer';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -50,6 +50,7 @@ function App() {
         <Certifications darkMode={darkMode} />
         <Resume darkMode={darkMode} />
         <Contact darkMode={darkMode} />
+        <Footer darkMode={darkMode} />
       </motion.main>
     </div>
   );

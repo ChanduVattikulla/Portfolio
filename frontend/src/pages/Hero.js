@@ -102,10 +102,12 @@ const Hero = ({ darkMode }) => {
 
         <motion.div className="hero-image-wrapper" variants={itemVariants}>
           <motion.div 
-            className={`profile-circle ${darkMode ? 'dark' : 'light'}`}
-            animate={darkMode ? { boxShadow: ['0 0 20px rgba(99, 102, 241, 0.3)', '0 0 40px rgba(99, 102, 241, 0.6)', '0 0 20px rgba(99, 102, 241, 0.3)'] } : {}}
-            transition={{ duration: 3, repeat: Infinity }}
+            className={`profile-circle floating ${darkMode ? 'dark' : 'light'}`}
+            initial={{ y: 0, scale: 0.98 }}
+            animate={{ y: [0, -16, 0], scale: [0.98, 1.02, 0.98] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           >
+            <div className="pulse-ring" aria-hidden="true"></div>
             <img src="/images/profile.jpeg" alt="Profile" className="profile-img" />
           </motion.div>
         </motion.div>

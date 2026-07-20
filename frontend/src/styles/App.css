@@ -16,6 +16,7 @@
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 30px 60px -15px rgba(99, 102, 241, 0.20);
   --glow-color: rgba(99, 102, 241, 0.08);
+  --glow-accent: #8b5cf6;
   --card-border-hover: rgba(99, 102, 241, 0.4);
   --gradient-main: linear-gradient(135deg, #6366f1 0%, #8b5cf6 40%, #d946ef 100%);
   --noise-opacity: 0.03;
@@ -35,6 +36,7 @@
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
   --glow-color: rgba(99, 102, 241, 0.15);
+  --glow-accent: #8b5cf6;
   --card-border-hover: rgba(99, 102, 241, 0.6);
   --noise-opacity: 0.05;
 }
@@ -118,7 +120,7 @@ body {
 /* 5. MAIN CONTENT SPACING */
 main {
   min-height: 100vh;
-  padding: 0 0 4rem 0;
+  padding: 0;
 }
 
 /* 6. SECTION CONTAINER */
@@ -374,6 +376,20 @@ a:hover {
 
 a:hover::after {
   width: 100%;
+}
+
+a.premium-social-pill::after,
+a.premium-social-pill:hover::after,
+a.premium-circle-btn::after,
+a.premium-circle-btn:hover::after,
+a.premium-cta-btn::after,
+a.premium-cta-btn:hover::after,
+a.metric-glass-card::after,
+a.metric-glass-card:hover::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* 16. IMAGES */
